@@ -6,7 +6,6 @@ private:
     Vector3 _position;
     Vector3 _intensity;
 public:
-    // TODO
     PointLight(Vector3 position, Vector3 intensity) {
         _position = position;
         _intensity = intensity;

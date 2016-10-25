@@ -11,7 +11,7 @@ int main(int argc, char** argv)
     }
 
     ReadScene(argc, argv);
-
+/*
     for (const auto& camera : CurrentScene->Cameras())
     {
         //Image img = camera.Render();
@@ -24,6 +24,6 @@ int main(int argc, char** argv)
         std::ofstream out(camera.OutputFile());
         //out << img;
     }
-
+*/
     return 0;
 }

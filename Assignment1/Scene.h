@@ -50,28 +50,41 @@ public:
     }
     
     void setPointLights(std::vector<PointLight> pointLights) {
-        int size = pointLights.size();
+        size_t size = pointLights.size();
         for (int i = 0; i < size; i++) _lights.push_back(pointLights[i]);
     }
     
     void setMaterials(std::vector<Material> materials) {
-        int size = materials.size();
+        size_t size = materials.size();
         for (int i = 0; i < size; i++) _materials.push_back(materials[i]);
     }
     
     void setVertices(std::vector<Vertex> vertices) {
-        int size = vertices.size();
+        size_t size = vertices.size();
         for (int i = 0; i < size; i++) _vertices.push_back(vertices[i]);
     }
     
     void setMeshes(std::vector<Mesh> meshes) {
-        int size = meshes.size();
+        size_t size = meshes.size();
         for (int i = 0; i < size; i++) meshes.push_back(meshes[i]);
     }
     
     void setSpheres(std::vector<Sphere> sphere) {
-        int size = sphere.size();
+        size_t size = sphere.size();
         for (int i = 0; i < size; i++) sphere.push_back(sphere[i]);
+    }
+    
+    void setCameras(std::vector<Camera> camera) {
+        size_t size = camera.size();
+        for (int i = 0; i < size; i++) camera.push_back(camera[i]);
+    }
+    
+    Material getMaterial(int key) {
+        return _materials[key - 1];
+    }
+    
+    Vertex getVertex(int key) {
+        return _vertices[key - 1];
     }
 };
 
@@ -90,7 +103,7 @@ void ReadScene(int argc, char** argv)
     
     // SCENE CREATION
     
-    CurrentScene = new Scene();
+    //CurrentScene = new Scene();
     
     // ray reflection count
     int rayReflectNum;
@@ -98,13 +111,13 @@ void ReadScene(int argc, char** argv)
     CurrentScene->setRayReflect(rayReflectNum);
     
     // background color
-    int background_x, background_y, background_z;
+    float background_x, background_y, background_z;
     std::cin >> background_x >> background_y >> background_z;
     Color backgroundColor(background_x, background_y, background_z);
     CurrentScene->setBackground(backgroundColor);
     
     // ambient light
-    int ambient_x, ambient_y, ambient_z;
+    float ambient_x, ambient_y, ambient_z;
     std::cin >> ambient_x >> ambient_y >> ambient_z;
     Color ambientLight(ambient_x, ambient_y, ambient_z);
     CurrentScene->setAmbient(ambientLight);
@@ -130,13 +143,14 @@ void ReadScene(int argc, char** argv)
     
     std::vector<Material> materialList;
     for (int i = 0; i < materialCount; i++) {
-        int mid;
-        std::cin >> mid;
-        Vector3 ambient, diffuse, reflectance;
-        std::cin >> ambient >> diffuse;
-        // cin specular TODO FIX
+        int materialID;
+        std::cin >> materialID;
+        Vector3 ambient, diffuse, rgb, reflectance;
+        float phong;
+        std::cin >> ambient >> diffuse >> rgb;
+        std::cin >> phong;
         std::cin >> reflectance;
-        Material material(mid, ambient, diffuse, specular, reflectance);
+        Material material(materialID, ambient, diffuse, rgb, phong, reflectance);
         materialList.push_back(material);
     }
     
@@ -170,16 +184,22 @@ void ReadScene(int argc, char** argv)
         if (tag[1] == 'M') { // mesh
             int meshID;
             std::cin >> meshID;
-            Material material = new Material; // fix
             
             int triangleCount;
             std::cin >> triangleCount;
             
             int materialID;
             std::cin >> materialID;
+            // not sure if it works this way?
+            Material material = CurrentScene->getMaterial(materialID);
+            
+            int vid1, vid2, vid3;
+            std::cin >> vid1 >> vid2 >> vid3;
             
             Vertex vertices[3];
-            std::cin >> vertices[0] >> vertices[1] >> vertices[2];
+            vertices[0] = CurrentScene->getVertex(vid1);
+            vertices[1] = CurrentScene->getVertex(vid2);
+            vertices[2] = CurrentScene->getVertex(vid3);
             
             Mesh mesh(meshID, triangleCount, material, vertices);
             meshes.push_back(mesh);
@@ -188,13 +208,17 @@ void ReadScene(int argc, char** argv)
             int sphereID;
             std::cin >> sphereID;
             
-            Material material = new Material; // fix
+            int materialID;
+            std::cin >> materialID;
+            // not sure if it works this way?
+            Material material = CurrentScene->getMaterial(materialID);
             
             float radius;
             std::cin >> radius;
             
-            Vertex center;
-            std::cin >> center;
+            int vid1;
+            std::cin >> vid1;
+            Vertex center = CurrentScene->getVertex(vid1);
             
             Sphere sphere(sphereID, material, radius, center);
             spheres.push_back(sphere);
@@ -204,7 +228,35 @@ void ReadScene(int argc, char** argv)
     CurrentScene->setMeshes(meshes);
     CurrentScene->setSpheres(spheres);
     
+    // CAMERA CONSTRUCTION
+    
+    int cameraCount;
+    std::cin >> cameraCount;
+    
+    std::vector<Camera> cameras;
+    
+    for (int i = 0; i < cameraCount; i++) {
+        int cid;
+        std::cin >> cid;
+        
+        Vector3 position, gaze, up;
+        std::cin >> position >> gaze >> up;
+        
+        float left, right, bottom, top, distance;
+        int horResolution, verResolution;
+        std::cin >> left >> right >> bottom >> top >> distance >> horResolution >> verResolution;
+        
+        std::string outputFile;
+        std::cin >> outputFile;
+        
+        Camera camera(cid, position, gaze, up, left, right, bottom, top, distance, horResolution, verResolution, outputFile);
+        cameras.push_back(camera);
+    }
+    
+    CurrentScene->setCameras(cameras);
+    
     scene_file.close();
+    camera_file.close();
 }
 
 #endif //RAYTRACER_SCENE_H

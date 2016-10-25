@@ -20,14 +20,6 @@ public:
     Vertex(const Vertex& rhs) {
         _position = rhs.Position();
     }
-    
-    /*
-    Vertex& operator=(const Vertex& rhs) {
-        if (this != &rhs) {
-            _position = rhs.Position();
-        }
-        return *this;
-    }*/
 };
 
 typedef size_t VertexId;
