@@ -39,9 +39,9 @@
 		218998EA1DBF661F0007677E /* Triangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Triangle.h; sourceTree = "<group>"; };
 		218998EB1DBF661F0007677E /* Vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3.h; sourceTree = "<group>"; };
 		218998EC1DBF661F0007677E /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
-		218998F21DBF666F0007677E /* cameras */ = {isa = PBXFileReference; lastKnownFileType = folder; path = cameras; sourceTree = "<group>"; };
-		218998F31DBF666F0007677E /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
-		218998F41DBF66950007677E /* scenes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scenes; sourceTree = "<group>"; };
+		218998F51DBF67290007677E /* cameras */ = {isa = PBXFileReference; lastKnownFileType = folder; path = cameras; sourceTree = "<group>"; };
+		218998F61DBF67290007677E /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		218998F71DBF67290007677E /* scenes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scenes; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,9 +74,9 @@
 		218998D71DBF65830007677E /* Assignment1 */ = {
 			isa = PBXGroup;
 			children = (
-				218998F41DBF66950007677E /* scenes */,
-				218998F21DBF666F0007677E /* cameras */,
-				218998F31DBF666F0007677E /* images */,
+				218998F51DBF67290007677E /* cameras */,
+				218998F61DBF67290007677E /* images */,
+				218998F71DBF67290007677E /* scenes */,
 				218998DF1DBF661F0007677E /* Camera.h */,
 				218998E01DBF661F0007677E /* Color.h */,
 				218998E11DBF661F0007677E /* Image.cpp */,
