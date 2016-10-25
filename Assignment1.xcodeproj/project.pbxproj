@@ -6,6 +6,12 @@
 	objectVersion = 46;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2189990C1DBF69AA0007677E /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 218998FD1DBF69AA0007677E /* Image.cpp */; };
+		2189990D1DBF69AA0007677E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 218999001DBF69AA0007677E /* main.cpp */; };
+		2189990E1DBF69AA0007677E /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 218999011DBF69AA0007677E /* Makefile */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		218998D31DBF65830007677E /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -20,6 +26,24 @@
 
 /* Begin PBXFileReference section */
 		218998D51DBF65830007677E /* Assignment1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Assignment1; sourceTree = BUILT_PRODUCTS_DIR; };
+		218998FA1DBF69AA0007677E /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		218998FB1DBF69AA0007677E /* cameras */ = {isa = PBXFileReference; lastKnownFileType = folder; path = cameras; sourceTree = "<group>"; };
+		218998FC1DBF69AA0007677E /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
+		218998FD1DBF69AA0007677E /* Image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Image.cpp; sourceTree = "<group>"; };
+		218998FE1DBF69AA0007677E /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		218998FF1DBF69AA0007677E /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		218999001DBF69AA0007677E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		218999011DBF69AA0007677E /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
+		218999021DBF69AA0007677E /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
+		218999031DBF69AA0007677E /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
+		218999041DBF69AA0007677E /* PointLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointLight.h; sourceTree = "<group>"; };
+		218999051DBF69AA0007677E /* Ray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ray.h; sourceTree = "<group>"; };
+		218999061DBF69AA0007677E /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
+		218999071DBF69AA0007677E /* scenes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scenes; sourceTree = "<group>"; };
+		218999081DBF69AA0007677E /* Sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sphere.h; sourceTree = "<group>"; };
+		218999091DBF69AA0007677E /* Triangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Triangle.h; sourceTree = "<group>"; };
+		2189990A1DBF69AA0007677E /* Vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3.h; sourceTree = "<group>"; };
+		2189990B1DBF69AA0007677E /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +76,24 @@
 		218998D71DBF65830007677E /* Assignment1 */ = {
 			isa = PBXGroup;
 			children = (
+				218998FA1DBF69AA0007677E /* Camera.h */,
+				218998FB1DBF69AA0007677E /* cameras */,
+				218998FC1DBF69AA0007677E /* Color.h */,
+				218998FD1DBF69AA0007677E /* Image.cpp */,
+				218998FE1DBF69AA0007677E /* Image.h */,
+				218998FF1DBF69AA0007677E /* images */,
+				218999001DBF69AA0007677E /* main.cpp */,
+				218999011DBF69AA0007677E /* Makefile */,
+				218999021DBF69AA0007677E /* Material.h */,
+				218999031DBF69AA0007677E /* Mesh.h */,
+				218999041DBF69AA0007677E /* PointLight.h */,
+				218999051DBF69AA0007677E /* Ray.h */,
+				218999061DBF69AA0007677E /* Scene.h */,
+				218999071DBF69AA0007677E /* scenes */,
+				218999081DBF69AA0007677E /* Sphere.h */,
+				218999091DBF69AA0007677E /* Triangle.h */,
+				2189990A1DBF69AA0007677E /* Vector3.h */,
+				2189990B1DBF69AA0007677E /* Vertex.h */,
 			);
 			path = Assignment1;
 			sourceTree = "<group>";
@@ -113,6 +155,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2189990E1DBF69AA0007677E /* Makefile in Sources */,
+				2189990D1DBF69AA0007677E /* main.cpp in Sources */,
+				2189990C1DBF69AA0007677E /* Image.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
