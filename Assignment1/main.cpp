@@ -1,15 +1,29 @@
-//
-//  main.cpp
-//  Assignment1
-//
-//  Created by Zeynep Akkalyoncu on 25/10/16.
-//  Copyright © 2016 Zeynep Akkalyoncu. All rights reserved.
-//
-
 #include <iostream>
+#include <fstream>
+#include "Scene.h"
 
-int main(int argc, const char * argv[]) {
-    // insert code here...
-    std::cout << "Hello, World!\n";
+int main(int argc, char** argv)
+{
+    if (argc < 2)
+    {
+        std::cerr << "Please provide scene and camera files" << std::endl;
+        return 1;
+    }
+
+    ReadScene(argc, argv);
+
+    for (const auto& camera : CurrentScene->Cameras())
+    {
+        Image img = camera.Render();
+
+        ///////////////////////
+        // BEWARE !
+        // RUN YOUR TESTS HERE!
+        ///////////////////////
+
+        std::ofstream out(camera.OutputFile());
+        out << img;
+    }
+
     return 0;
 }

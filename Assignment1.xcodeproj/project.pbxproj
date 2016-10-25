@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		218998D91DBF65830007677E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 218998D81DBF65830007677E /* main.cpp */; };
+		218998ED1DBF661F0007677E /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 218998E11DBF661F0007677E /* Image.cpp */; };
+		218998EE1DBF661F0007677E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 218998E31DBF661F0007677E /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -24,7 +25,23 @@
 
 /* Begin PBXFileReference section */
 		218998D51DBF65830007677E /* Assignment1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Assignment1; sourceTree = BUILT_PRODUCTS_DIR; };
-		218998D81DBF65830007677E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		218998DF1DBF661F0007677E /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
+		218998E01DBF661F0007677E /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
+		218998E11DBF661F0007677E /* Image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Image.cpp; sourceTree = "<group>"; };
+		218998E21DBF661F0007677E /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
+		218998E31DBF661F0007677E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		218998E41DBF661F0007677E /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
+		218998E51DBF661F0007677E /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mesh.h; sourceTree = "<group>"; };
+		218998E61DBF661F0007677E /* PointLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointLight.h; sourceTree = "<group>"; };
+		218998E71DBF661F0007677E /* Ray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ray.h; sourceTree = "<group>"; };
+		218998E81DBF661F0007677E /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
+		218998E91DBF661F0007677E /* Sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sphere.h; sourceTree = "<group>"; };
+		218998EA1DBF661F0007677E /* Triangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Triangle.h; sourceTree = "<group>"; };
+		218998EB1DBF661F0007677E /* Vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3.h; sourceTree = "<group>"; };
+		218998EC1DBF661F0007677E /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
+		218998F21DBF666F0007677E /* cameras */ = {isa = PBXFileReference; lastKnownFileType = folder; path = cameras; sourceTree = "<group>"; };
+		218998F31DBF666F0007677E /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
+		218998F41DBF66950007677E /* scenes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scenes; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +74,23 @@
 		218998D71DBF65830007677E /* Assignment1 */ = {
 			isa = PBXGroup;
 			children = (
-				218998D81DBF65830007677E /* main.cpp */,
+				218998F41DBF66950007677E /* scenes */,
+				218998F21DBF666F0007677E /* cameras */,
+				218998F31DBF666F0007677E /* images */,
+				218998DF1DBF661F0007677E /* Camera.h */,
+				218998E01DBF661F0007677E /* Color.h */,
+				218998E11DBF661F0007677E /* Image.cpp */,
+				218998E21DBF661F0007677E /* Image.h */,
+				218998E31DBF661F0007677E /* main.cpp */,
+				218998E41DBF661F0007677E /* Material.h */,
+				218998E51DBF661F0007677E /* Mesh.h */,
+				218998E61DBF661F0007677E /* PointLight.h */,
+				218998E71DBF661F0007677E /* Ray.h */,
+				218998E81DBF661F0007677E /* Scene.h */,
+				218998E91DBF661F0007677E /* Sphere.h */,
+				218998EA1DBF661F0007677E /* Triangle.h */,
+				218998EB1DBF661F0007677E /* Vector3.h */,
+				218998EC1DBF661F0007677E /* Vertex.h */,
 			);
 			path = Assignment1;
 			sourceTree = "<group>";
@@ -119,7 +152,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				218998D91DBF65830007677E /* main.cpp in Sources */,
+				218998EE1DBF661F0007677E /* main.cpp in Sources */,
+				218998ED1DBF661F0007677E /* Image.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
