@@ -10,6 +10,13 @@ class Material {
     //////////////////
     /// PUT YOUR VARIABLES, HELPER FUNCTIONS HERE !
     //////////////////
+    int _materialID;
+    Vector3 _ambient;
+    Vector3 _diffuse;
+    // specular - not vector3
+    // TODO: fix
+    Vector3 _specular;
+    Vector3 _reflectance;
 public:
 
     /*
@@ -17,6 +24,14 @@ public:
      */
 
     friend std::istream& operator>>(std::istream& stream, Material& mat);
+    
+    Material(int mid, Vector3 ambient,Vector3 diffuse, Vector3 specular, Vector3 reflectance) {
+        _materialID = mid;
+        _ambient = ambient;
+        _diffuse = diffuse;
+        _specular = specular;
+        _reflectance = reflectance;
+    }
 };
 
 using MaterialId = int;

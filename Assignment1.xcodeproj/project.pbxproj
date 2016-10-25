@@ -12,6 +12,16 @@
 		2189990E1DBF69AA0007677E /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 218999011DBF69AA0007677E /* Makefile */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		218999131DBF84FB0007677E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2189990F1DBF84FB0007677E /* HolyReview.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2133EF1D1DB6BACF002FA914;
+			remoteInfo = HolyReview;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXCopyFilesBuildPhase section */
 		218998D31DBF65830007677E /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -44,6 +54,7 @@
 		218999091DBF69AA0007677E /* Triangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Triangle.h; sourceTree = "<group>"; };
 		2189990A1DBF69AA0007677E /* Vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3.h; sourceTree = "<group>"; };
 		2189990B1DBF69AA0007677E /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
+		2189990F1DBF84FB0007677E /* HolyReview.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HolyReview.xcodeproj; path = ../HolyReview/HolyReview.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -60,6 +71,7 @@
 		218998CC1DBF65830007677E = {
 			isa = PBXGroup;
 			children = (
+				2189990F1DBF84FB0007677E /* HolyReview.xcodeproj */,
 				218998D71DBF65830007677E /* Assignment1 */,
 				218998D61DBF65830007677E /* Products */,
 			);
@@ -96,6 +108,14 @@
 				2189990B1DBF69AA0007677E /* Vertex.h */,
 			);
 			path = Assignment1;
+			sourceTree = "<group>";
+		};
+		218999101DBF84FB0007677E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				218999141DBF84FB0007677E /* HolyReview */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,12 +163,28 @@
 			mainGroup = 218998CC1DBF65830007677E;
 			productRefGroup = 218998D61DBF65830007677E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 218999101DBF84FB0007677E /* Products */;
+					ProjectRef = 2189990F1DBF84FB0007677E /* HolyReview.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				218998D41DBF65830007677E /* Assignment1 */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		218999141DBF84FB0007677E /* HolyReview */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.executable";
+			path = HolyReview;
+			remoteRef = 218999131DBF84FB0007677E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		218998D11DBF65830007677E /* Sources */ = {

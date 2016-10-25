@@ -14,7 +14,7 @@ int main(int argc, char** argv)
 
     for (const auto& camera : CurrentScene->Cameras())
     {
-        Image img = camera.Render();
+        //Image img = camera.Render();
 
         ///////////////////////
         // BEWARE !
@@ -22,7 +22,7 @@ int main(int argc, char** argv)
         ///////////////////////
 
         std::ofstream out(camera.OutputFile());
-        out << img;
+        //out << img;
     }
 
     return 0;
