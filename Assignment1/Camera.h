@@ -36,4 +36,8 @@ public:
     }
 };
 
+Image Camera::Render() const {
+    //
+}
+
 #endif //RAYTRACER_CAMERA_H
