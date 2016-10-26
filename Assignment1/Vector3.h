@@ -13,13 +13,14 @@ public:
         return stream >> vertex._data[0] >> vertex._data[1] >> vertex._data[2];
     }
     
-    Vector3& operator=(const Vector3& rhs) {
-        if (this == &rhs) {
+    //Vector3& operator=(const Vector3& rhs) {
+    void operator=(const Vector3& rhs) {
+        if (this != &rhs) {
             _data[0] = rhs._data[0];
             _data[1] = rhs._data[1];
             _data[2] = rhs._data[2];
         }
-        return *this;
+      //  return *this;
     }
 };
 

@@ -88,20 +88,20 @@
 		218998D71DBF65830007677E /* Assignment1 */ = {
 			isa = PBXGroup;
 			children = (
-				218998FA1DBF69AA0007677E /* Camera.h */,
+				218999071DBF69AA0007677E /* scenes */,
+				218998FF1DBF69AA0007677E /* images */,
 				218998FB1DBF69AA0007677E /* cameras */,
+				218998FA1DBF69AA0007677E /* Camera.h */,
 				218998FC1DBF69AA0007677E /* Color.h */,
 				218998FD1DBF69AA0007677E /* Image.cpp */,
 				218998FE1DBF69AA0007677E /* Image.h */,
-				218998FF1DBF69AA0007677E /* images */,
-				218999001DBF69AA0007677E /* main.cpp */,
 				218999011DBF69AA0007677E /* Makefile */,
+				218999001DBF69AA0007677E /* main.cpp */,
 				218999021DBF69AA0007677E /* Material.h */,
 				218999031DBF69AA0007677E /* Mesh.h */,
 				218999041DBF69AA0007677E /* PointLight.h */,
 				218999051DBF69AA0007677E /* Ray.h */,
 				218999061DBF69AA0007677E /* Scene.h */,
-				218999071DBF69AA0007677E /* scenes */,
 				218999081DBF69AA0007677E /* Sphere.h */,
 				218999091DBF69AA0007677E /* Triangle.h */,
 				2189990A1DBF69AA0007677E /* Vector3.h */,
@@ -320,6 +320,7 @@
 				218998DE1DBF65830007677E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

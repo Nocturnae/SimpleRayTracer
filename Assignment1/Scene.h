@@ -11,9 +11,11 @@
 #include <iostream>
 #include <string>
 
+#include <typeinfo>
+
 class Scene {
 
-    std::vector<Vertex> _vertices;
+    //std::vector<Vertex> _vertices;
 
     std::vector<Camera> _cameras;
     std::vector<Sphere> _spheres;
@@ -28,11 +30,17 @@ class Scene {
     Color _ambient;
 
 public:
+    
+    std::vector<Vertex> _vertices;
 
     const std::vector<Camera>& Cameras() const {
         return _cameras;
     }
-
+    /*
+    std::Vector<Sphere>& Spheres() const {
+        return _spheres;
+    }
+     */
     //////////////////////////////
     // READ SCENE FUNCTIONS HERE !
     //////////////////////////////
@@ -83,7 +91,7 @@ public:
         return _materials[key - 1];
     }
     
-    Vertex getVertex(int key) {
+    Vertex& getVertex(int key) {
         return _vertices[key - 1];
     }
 };
@@ -98,164 +106,179 @@ void ReadScene(int argc, char** argv)
      */
     
     std::ifstream scene_file, camera_file;
+    
     scene_file.open(argv[1]);
-    camera_file.open(argv[2]);
     
     // SCENE CREATION
     
-    //CurrentScene = new Scene();
+    CurrentScene = new Scene();
     
-    // ray reflection count
-    int rayReflectNum;
-    std::cin >> rayReflectNum;
-    CurrentScene->setRayReflect(rayReflectNum);
-    
-    // background color
-    float background_x, background_y, background_z;
-    std::cin >> background_x >> background_y >> background_z;
-    Color backgroundColor(background_x, background_y, background_z);
-    CurrentScene->setBackground(backgroundColor);
-    
-    // ambient light
-    float ambient_x, ambient_y, ambient_z;
-    std::cin >> ambient_x >> ambient_y >> ambient_z;
-    Color ambientLight(ambient_x, ambient_y, ambient_z);
-    CurrentScene->setAmbient(ambientLight);
-    
-    // point light
-    int pointLightCount;
-    std::cin >> pointLightCount;
-    
-    std::vector<PointLight> pointLightList;
-    for (int i = 0; i < pointLightCount; i++) {
-        Vector3 points, intensity;
-        std::cin >> points;
-        std::cin >> intensity;
-        PointLight pointLight(points, intensity);
-        pointLightList.push_back(pointLight);
-    }
-    
-    CurrentScene->setPointLights(pointLightList);
-    
-    // material
-    int materialCount;
-    std::cin >> materialCount;
-    
-    std::vector<Material> materialList;
-    for (int i = 0; i < materialCount; i++) {
-        int materialID;
-        std::cin >> materialID;
-        Vector3 ambient, diffuse, rgb, reflectance;
-        float phong;
-        std::cin >> ambient >> diffuse >> rgb;
-        std::cin >> phong;
-        std::cin >> reflectance;
-        Material material(materialID, ambient, diffuse, rgb, phong, reflectance);
-        materialList.push_back(material);
-    }
-    
-    CurrentScene->setMaterials(materialList);
-    
-    // vertices
-    int vertexCount;
-    std::cin >> vertexCount;
-    
-    std::vector<Vertex> vertices;
-    for (int i = 0; i < vertexCount; i++) {
-        Vector3 coordinates;
-        std::cin >> coordinates;
-        Vertex vertex(coordinates);
-        vertices.push_back(vertex);
-    }
-    
-    CurrentScene->setVertices(vertices);
-    
-    // models
-    int modelCount;
-    std::cin >> modelCount;
-    
-    std::vector<Mesh> meshes;
-    std::vector<Sphere> spheres;
-    
-    for (int i = 0; i < modelCount; i++) {
-        std::string tag;
-        std::cin >> tag;
+    if (scene_file.good()) {
+        // ray reflection count
+        int rayReflectNum;
+        scene_file >> rayReflectNum;
+        CurrentScene->setRayReflect(rayReflectNum);
         
-        if (tag[1] == 'M') { // mesh
-            int meshID;
-            std::cin >> meshID;
-            
-            int triangleCount;
-            std::cin >> triangleCount;
-            
-            int materialID;
-            std::cin >> materialID;
-            // not sure if it works this way?
-            Material material = CurrentScene->getMaterial(materialID);
-            
-            int vid1, vid2, vid3;
-            std::cin >> vid1 >> vid2 >> vid3;
-            
-            Vertex vertices[3];
-            vertices[0] = CurrentScene->getVertex(vid1);
-            vertices[1] = CurrentScene->getVertex(vid2);
-            vertices[2] = CurrentScene->getVertex(vid3);
-            
-            Mesh mesh(meshID, triangleCount, material, vertices);
-            meshes.push_back(mesh);
+        // background color
+        float background_x, background_y, background_z;
+        scene_file >> background_x >> background_y >> background_z;
+        Color backgroundColor(background_x, background_y, background_z);
+        CurrentScene->setBackground(backgroundColor);
+        
+        // ambient light
+        float ambient_x, ambient_y, ambient_z;
+        scene_file >> ambient_x >> ambient_y >> ambient_z;
+        Color ambientLight(ambient_x, ambient_y, ambient_z);
+        CurrentScene->setAmbient(ambientLight);
+        
+        // point light
+        int pointLightCount;
+        scene_file >> pointLightCount;
+        
+        std::vector<PointLight> pointLightList;
+        for (int i = 0; i < pointLightCount; i++) {
+            Vector3 points, intensity;
+            scene_file >> points;
+            scene_file >> intensity;
+            PointLight pointLight(points, intensity);
+            pointLightList.push_back(pointLight);
         }
-        else if (tag[1] == 'S') { // sphere
-            int sphereID;
-            std::cin >> sphereID;
-            
+        
+        CurrentScene->setPointLights(pointLightList);
+        
+        // material
+        int materialCount;
+        scene_file >> materialCount;
+        
+        std::vector<Material> materialList;
+        for (int i = 0; i < materialCount; i++) {
+            std::string materialTag;
+            scene_file >> materialTag;
             int materialID;
-            std::cin >> materialID;
-            // not sure if it works this way?
-            Material material = CurrentScene->getMaterial(materialID);
-            
-            float radius;
-            std::cin >> radius;
-            
-            int vid1;
-            std::cin >> vid1;
-            Vertex center = CurrentScene->getVertex(vid1);
-            
-            Sphere sphere(sphereID, material, radius, center);
-            spheres.push_back(sphere);
+            scene_file >> materialID;
+            Vector3 ambient, diffuse, rgb, reflectance;
+            float phong;
+            scene_file >> ambient >> diffuse >> rgb;
+            scene_file >> phong;
+            scene_file >> reflectance;
+            Material material(materialID, ambient, diffuse, rgb, phong, reflectance);
+            materialList.push_back(material);
         }
+        
+        CurrentScene->setMaterials(materialList);
+        
+        // vertices
+        int vertexCount;
+        scene_file >> vertexCount;
+        
+        std::string vertexTag;
+        scene_file >> vertexTag; scene_file >> vertexTag;
+        
+        std::vector<Vertex> vertexList;
+        for (int i = 0; i < vertexCount; i++) {
+            Vector3 coordinates;
+            scene_file >> coordinates;
+            Vertex vertex(coordinates);
+            vertexList.push_back(vertex);
+        }
+        
+        CurrentScene->setVertices(vertexList);
+        
+        // models
+        int modelCount;
+        scene_file >> modelCount;
+        
+        std::vector<Mesh> meshes;
+        std::vector<Sphere> spheres;
+        
+        for (int i = 0; i < modelCount; i++) {
+            std::string tag;
+            scene_file >> tag;
+            
+            if (tag[1] == 'M') { // mesh
+                int meshID;
+                scene_file >> meshID;
+                
+                int triangleCount;
+                scene_file >> triangleCount;
+                
+                int materialID;
+                scene_file >> materialID;
+                // not sure if it works this way?
+                Material material = CurrentScene->getMaterial(materialID);
+                
+                int vid1, vid2, vid3;
+                scene_file >> vid1 >> vid2 >> vid3;
+                
+                Vertex vertices[3];
+                vertices[0] = CurrentScene->getVertex(vid1);
+                vertices[1] = CurrentScene->getVertex(vid2);
+                vertices[2] = CurrentScene->getVertex(vid3);
+                
+                Mesh mesh(meshID, triangleCount, material, vertices);
+                meshes.push_back(mesh);
+            }
+            else if (tag[1] == 'S') { // sphere
+                int sphereID;
+                scene_file >> sphereID;
+                
+                int materialID;
+                scene_file >> materialID;
+                // not sure if it works this way?
+                Material material = CurrentScene->getMaterial(materialID);
+                
+                float radius;
+                scene_file >> radius;
+                
+                int vid1;
+                scene_file >> vid1;
+                Vertex center = CurrentScene->getVertex(vid1);
+                
+                Sphere sphere(sphereID, material, radius, center);
+                spheres.push_back(sphere);
+            }
+        }
+        
+        CurrentScene->setMeshes(meshes);
+        CurrentScene->setSpheres(spheres);
+        
     }
-    
-    CurrentScene->setMeshes(meshes);
-    CurrentScene->setSpheres(spheres);
+
+     scene_file.close();
     
     // CAMERA CONSTRUCTION
     
-    int cameraCount;
-    std::cin >> cameraCount;
+    camera_file.open(argv[2]);
     
-    std::vector<Camera> cameras;
-    
-    for (int i = 0; i < cameraCount; i++) {
-        int cid;
-        std::cin >> cid;
+    if (camera_file.good()) {
+        int cameraCount;
+        camera_file >> cameraCount;
         
-        Vector3 position, gaze, up;
-        std::cin >> position >> gaze >> up;
+        std::vector<Camera> cameras;
         
-        float left, right, bottom, top, distance;
-        int horResolution, verResolution;
-        std::cin >> left >> right >> bottom >> top >> distance >> horResolution >> verResolution;
+        for (int i = 0; i < cameraCount; i++) {
+            int cid;
+            std::string cameraTag;
+            camera_file >> cameraTag;
+            camera_file >> cid;
+            
+            Vector3 position, gaze, up;
+            camera_file >> position >> gaze >> up;
+            
+            float left, right, bottom, top, distance;
+            int horResolution, verResolution;
+            camera_file >> left >> right >> bottom >> top >> distance >> horResolution >> verResolution;
+            
+            std::string outputFile;
+            camera_file >> outputFile;
+            
+            Camera camera(cid, position, gaze, up, left, right, bottom, top, distance, horResolution, verResolution, outputFile);
+            cameras.push_back(camera);
+        }
         
-        std::string outputFile;
-        std::cin >> outputFile;
-        
-        Camera camera(cid, position, gaze, up, left, right, bottom, top, distance, horResolution, verResolution, outputFile);
-        cameras.push_back(camera);
+        CurrentScene->setCameras(cameras);
     }
     
-    CurrentScene->setCameras(cameras);
-    
-    scene_file.close();
     camera_file.close();
 }
 

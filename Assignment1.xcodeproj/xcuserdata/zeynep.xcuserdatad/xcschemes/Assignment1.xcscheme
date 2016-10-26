@@ -63,11 +63,11 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "scenes/spheres_scene.txt"
+            argument = "/Users/zeynep/Workspace/Assignment1/Assignment1/scenes/spheres_scene.txt"
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "cameras/spheres_camera.txt"
+            argument = "/Users/zeynep/Workspace/Assignment1/Assignment1/cameras/spheres_camera.txt"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

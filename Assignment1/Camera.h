@@ -3,6 +3,8 @@
 
 #include "Vector3.h"
 #include "Image.h"
+#include "Scene.h"
+#include "Sphere.h"
 
 class Camera {
     int _cameraID;
@@ -60,7 +62,20 @@ public:
 
 /*
 Image Camera::Render() const {
-    //
+    
+    for (int i = 0; i < _imagePlane.Width; i++) {
+        for (int j = 0; j < _imagePlane.Height; j++) {
+            int intersectionTime = INT_MIN;
+            Sphere closestSphere; // set null somehow
+            
+            for (const auto& sphere : CurrentScene->Spheres()) {
+                
+            }
+            
+            
+        }
+    }
 }
 */
+ 
 #endif //RAYTRACER_CAMERA_H
