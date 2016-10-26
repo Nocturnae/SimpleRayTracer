@@ -20,6 +20,7 @@ public:
     Vertex(const Vertex& rhs) {
         _position = rhs.Position();
     }
+
 };
 
 typedef size_t VertexId;

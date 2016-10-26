@@ -9,6 +9,7 @@ private:
     int _triangleCount;
     Material _material;
     Vertex _vertices[3];
+    // TODO: add triangles
 public:
     Mesh(int meshID, int triangleCount, Material material, Vertex vertices[3]) : _material(material) {
         _meshID = meshID;

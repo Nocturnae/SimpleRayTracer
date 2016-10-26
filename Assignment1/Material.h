@@ -6,11 +6,13 @@
 
 class Scene;
 
+using MaterialId = int;
+
 class Material {
     //////////////////
     /// PUT YOUR VARIABLES, HELPER FUNCTIONS HERE !
     //////////////////
-    int _materialID;
+    MaterialId _materialID;
     Vector3 _ambient;
     Vector3 _diffuse;
     struct {
@@ -26,16 +28,14 @@ public:
 
     friend std::istream& operator>>(std::istream& stream, Material& mat);
     
-    Material(int mid, Vector3 ambient,Vector3 diffuse, Vector3 rgb, float phong, Vector3 reflectance) {
-        _materialID = mid;
-        _ambient = ambient;
-        _diffuse = diffuse;
+    Material(MaterialId mid, Vector3 ambient, Vector3 diffuse, Vector3 rgb, float phong, Vector3 reflectance) : _materialID(mid), _ambient(ambient), _diffuse(diffuse), _reflectance(reflectance) {
         _specular.rgb = rgb;
         _specular.phong = phong;
-        _reflectance = reflectance;
+    }
+    
+    MaterialId MaterialID() const {
+        return _materialID;
     }
 };
-
-using MaterialId = int;
 
 #endif //RAYTRACER_MATERIAL_H

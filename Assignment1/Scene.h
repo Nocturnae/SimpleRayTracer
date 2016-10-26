@@ -11,8 +11,6 @@
 #include <iostream>
 #include <string>
 
-#include <typeinfo>
-
 class Scene {
 
     //std::vector<Vertex> _vertices;
