@@ -3,8 +3,7 @@
 
 #include "Ray.h"
 #include "Vertex.h"
-#include <math.h>
-#
+#include <cmath>
 
 class Sphere {
 private:
@@ -25,7 +24,7 @@ public:
     bool Intersect(const Ray& ray, RayHitInfo& hitInfo) const;
 };
 
-bool Sphere::Intersect(const Ray& ray, RayHitInfo& hitInfo) const {
+inline bool Sphere::Intersect(const Ray& ray, RayHitInfo& hitInfo) const {
     
     // A = (d.d)/2, B = d.(e-c), B^2 = (d.(e-c))^2, 4AC = (d.d)((e-c).(e-c)-R^2)
     // TODO: check calculations
@@ -59,26 +58,5 @@ bool Sphere::Intersect(const Ray& ray, RayHitInfo& hitInfo) const {
         return true;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 #endif //RAYTRACER_SPHERE_H

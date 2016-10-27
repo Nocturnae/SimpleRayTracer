@@ -2,6 +2,7 @@
 #define MATH_VECTOR3_H
 
 #include <iostream>
+#include <cmath>
 
 class Vector3
 {
@@ -46,6 +47,10 @@ public:
     
     float dotProduct(Vector3& rhs) {
         return ((_data[0] * rhs._data[0]) + (_data[1] * rhs._data[1]) + (_data[2] * rhs._data[2]));
+    }
+    
+    float length() {
+        return sqrt(pow(_data[0], 2) + pow(_data[1], 2) + pow(_data[2], 2));
     }
 };
 

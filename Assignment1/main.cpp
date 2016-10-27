@@ -2,6 +2,8 @@
 #include <fstream>
 #include "Scene.h"
 
+using namespace std;
+
 int main(int argc, char** argv)
 {
     if (argc < 2)
@@ -11,19 +13,21 @@ int main(int argc, char** argv)
     }
 
     ReadScene(argc, argv);
-/*
+
     for (const auto& camera : CurrentScene->Cameras())
     {
-        //Image img = camera.Render();
+        Image img = camera.Render();
 
         ///////////////////////
         // BEWARE !
         // RUN YOUR TESTS HERE!
         ///////////////////////
+        
+        cout << "." << endl;
 
         std::ofstream out(camera.OutputFile());
-        //out << img;
+        out << img;
     }
-*/
+
     return 0;
 }

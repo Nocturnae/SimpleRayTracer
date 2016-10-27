@@ -1,5 +1,7 @@
 SRC = main.cpp \
-	Image.cpp
+	Image.cpp \
+	Camera.cpp \
+	Scene.cpp
 
 OBJ = $(SRC:.cpp=.o)
 CFLAGS = -std=c++11 -O3
