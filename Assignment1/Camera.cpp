@@ -9,6 +9,7 @@
 #include <stdio.h>
 #include "Scene.h"
 #include "Camera.h"
+#include <cmath>
 
 Camera::Camera(int cameraID, Vector3 position, Vector3 gaze, Vector3 up, float left, float right, float bottom, float top, float distance, int horResolution, int verResolution, std::string outputFile) {
     _cameraID = cameraID;
@@ -83,6 +84,10 @@ Image Camera::Render() const {
                 Color pixelColor = CurrentScene->Ambient();
                 for (const auto& light : CurrentScene->Lights()) {
                     // TODO: compute shadow ray
+                    // compute shadow ray
+                    pixelColor = light.Intensity() / (4 * M_PI * pow(distance, 2));
+                    
+                    
                 }
                 outputImage.Pixel(w, h) = pixelColor;
             }
