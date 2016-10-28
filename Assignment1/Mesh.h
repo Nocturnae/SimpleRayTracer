@@ -7,16 +7,13 @@
 class Mesh {
 private:
     int _meshID;
-    int _triangleCount;
     Material _material;
-    Vertex _vertices[3]; // TODO: remove
-    // TODO: add triangles
-    std::vector<Triangle> _triangles;
 public:
-    Mesh(int meshID, int triangleCount, Material material, Vertex vertices[3]) : _material(material) {
+    std::vector<Triangle> _triangles;
+    Mesh(int meshID, Material material, std::vector<Triangle> triangles) : _material(material) {
         _meshID = meshID;
-        _triangleCount = triangleCount;
-        for (int i = 0; i < 3; i++) _vertices[i] = vertices[i];
+        //for (int i = 0; i < triangles.size(); i++) _triangles[i] = triangles[i];
+        _triangles = triangles;
     }
 };
 

@@ -36,6 +36,10 @@ public:
         return _cameras;
     }
     
+    const std::vector<Mesh>& Meshes() const {
+        return _meshes;
+    }
+    
     const std::vector<Sphere>& Spheres() const {
         return _spheres;
     }

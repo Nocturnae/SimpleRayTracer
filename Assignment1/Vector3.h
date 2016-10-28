@@ -17,14 +17,18 @@ public:
     Vector3() : _data{0, 0, 0} {} // risky
     Vector3(float d1, float d2, float d3) : _data{d1, d2, d3} {}
     
-    //Vector3& operator=(const Vector3& rhs) {
+    Vector3(const Vector3& rhs) {
+        _data[0] = rhs._data[0];
+        _data[1] = rhs._data[1];
+        _data[2] = rhs._data[2];
+    }
+    
     void operator=(const Vector3& rhs) {
         if (this != &rhs) {
             _data[0] = rhs._data[0];
             _data[1] = rhs._data[1];
             _data[2] = rhs._data[2];
         }
-      //  return *this;
     }
     
     friend Vector3 operator-(const Vector3& v1, const Vector3& v2) {
