@@ -49,11 +49,17 @@ public:
                        v1._data[2] * scalar);
     }
     
+    friend Vector3 operator/(const Vector3& v1, float scalar) {
+        return Vector3(v1._data[0] / scalar,
+                       v1._data[1] / scalar,
+                       v1._data[2] / scalar);
+    }
+    
     float dotProduct(Vector3& rhs) {
         return ((_data[0] * rhs._data[0]) + (_data[1] * rhs._data[1]) + (_data[2] * rhs._data[2]));
     }
     
-    float length() {
+    float length() const {
         return sqrt(pow(_data[0], 2) + pow(_data[1], 2) + pow(_data[2], 2));
     }
 };

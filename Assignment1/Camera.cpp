@@ -54,7 +54,7 @@ Image Camera::Render() const {
             float u = (left + ((right - left) * (w + 0.5) / width));
             float v = (bottom + ((top - bottom) * (h + 0.5) / height));
            
-            Ray viewingRay(_position, (_gaze * distance) + (cameraLeft * u) + (cameraUp * v));
+            Ray viewingRay(_position, (_gaze * distance) + (cameraLeft * -u) + (cameraUp * v));
             int intersectionTime = INT_MAX;
             
             RayHitInfo rayHitInfo;
@@ -80,16 +80,26 @@ Image Camera::Render() const {
                }
            }
            
-            if (intersectionTime < INT_MAX) {
-                Color pixelColor = CurrentScene->Ambient();
-                for (const auto& light : CurrentScene->Lights()) {
-                    // TODO: compute shadow ray
-                    // compute shadow ray
-                    pixelColor = light.Intensity() / (4 * M_PI * pow(distance, 2));
-                    
-                    
-                }
-                outputImage.Pixel(w, h) = pixelColor;
+           float diffuse_x = 0, diffuse_y = 0, diffuse_z = 0;
+           if (intersectionTime < INT_MAX) {
+               Color ambientColor = CurrentScene->Ambient();
+               
+               float diffuse_x = 0, diffuse_y = 0, diffuse_z = 0;
+               for (const auto& light : CurrentScene->Lights()) {
+                   // compute shadow ray
+                   Ray reverseIntersectRay(rayHitInfo.Position, light.Position() - rayHitInfo.Position);
+                   
+                   Vector3 actualIntensity = light.Intensity() / (4 * M_PI * pow(reverseIntersectRay.Direction().length(), 2));
+                   float nl = (rayHitInfo.Normal._data[0] * reverseIntersectRay.Direction()._data[0])
+                                + (rayHitInfo.Normal._data[1] * reverseIntersectRay.Direction()._data[1])
+                                    + (rayHitInfo.Normal._data[2] * reverseIntersectRay.Direction()._data[2]);
+                   diffuse_x += actualIntensity._data[0] * nl;
+                   diffuse_y += actualIntensity._data[1] * nl;
+                   diffuse_z += actualIntensity._data[2] * nl;
+               }
+               
+               Color diffuseColor(diffuse_x, diffuse_y, diffuse_z);
+               outputImage.Pixel(w, h) = ambientColor + diffuseColor;
             }
         }
     }

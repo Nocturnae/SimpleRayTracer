@@ -36,6 +36,13 @@ public:
     {
         return (*this) * (1 / denom);
     }
+    
+    friend Color operator+(const Color& lhs, const Color& rhs)
+    {
+        return Color(lhs._channels[0] + rhs._channels[0],
+                     lhs._channels[1] + rhs._channels[1],
+                     lhs._channels[2] + rhs._channels[2]);
+    }
 
     friend std::istream& operator>>(std::istream& stream, Color& color);
 };

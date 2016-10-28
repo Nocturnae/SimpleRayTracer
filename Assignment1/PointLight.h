@@ -14,6 +14,10 @@ public:
     Vector3 Intensity() const {
         return _intensity;
     }
+    
+    Vector3 Position() const {
+        return _position;
+    }
 };
 
 #endif //RAYTRACER_POINTLIGHT_H
