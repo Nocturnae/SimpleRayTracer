@@ -52,7 +52,8 @@ inline bool Sphere::Intersect(const Ray& ray, RayHitInfo& hitInfo) const {
         
         hitInfo.Material = _material.MaterialID();
         hitInfo.Position = p;
-        hitInfo.Normal = (p - sphereCenter); // normalize?
+        hitInfo.Normal = (p - sphereCenter) / _radius;
+        //hitInfo.Normal = (p - sphereCenter);
         //hitInfo.Parameter = TODO
         
         return true;
