@@ -31,6 +31,10 @@ public:
         }
     }
     
+    float& operator[](int i) {
+        return _data[i];
+    }
+    
     friend Vector3 operator-(const Vector3& v1, const Vector3& v2) {
         return Vector3(v1._data[0] - v2._data[0],
                             v1._data[1] - v2._data[1],
@@ -47,6 +51,12 @@ public:
         return Vector3(v1._data[0] * scalar,
                        v1._data[1] * scalar,
                        v1._data[2] * scalar);
+    }
+    
+    friend Vector3 operator*(const Vector3& v1, const Vector3& v2) {
+        return Vector3(v1._data[0] * v2._data[0],
+                       v1._data[1] * v2._data[0],
+                       v1._data[2] * v2._data[0]);
     }
     
     friend Vector3 operator/(const Vector3& v1, float scalar) {

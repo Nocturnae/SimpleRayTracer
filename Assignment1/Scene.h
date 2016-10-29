@@ -7,10 +7,14 @@
 #include "Mesh.h"
 #include "Color.h"
 #include "PointLight.h"
+#include "Material.h"
 #include "Vertex.h"
 #include <iostream>
 #include <string>
 #include <fstream>
+#include "Material.h"
+
+class Material;
 
 class Scene {
 

@@ -31,6 +31,10 @@ public:
                      _channels[1] * c,
                      _channels[2] * c);
     }
+    
+    const float* Channels() const {
+        return _channels;
+    }
 
     Color operator/(float denom) const
     {

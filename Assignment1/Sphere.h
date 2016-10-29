@@ -28,7 +28,7 @@ inline bool Sphere::Intersect(const Ray& ray, RayHitInfo& hitInfo) const {
     
     // A = (d.d)/2, B = d.(e-c), B^2 = (d.(e-c))^2, 4AC = (d.d)((e-c).(e-c)-R^2)
     // TODO: check calculations
-    Vector3 rayDirection = ray.Direction();
+    Vector3 rayDirection = ray.Direction() / ray.Direction().length();
     Vector3 rayOrigin = ray.Origin();
     Vector3 sphereCenter = _center.Position();
     Vector3 ec = rayOrigin - sphereCenter;

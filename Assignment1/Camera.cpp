@@ -78,26 +78,36 @@ Image Camera::Render() const {
                }
            }
            
-           float diffuse_x = 0, diffuse_y = 0, diffuse_z = 0;
-           if (intersectionTime < INT_MAX) {
-               Color ambientColor = CurrentScene->Ambient();
+           if (intersectionTime < __FLT_MAX__) {
+               Material objectMaterial = CurrentScene->getMaterial(rayHitInfo.Material);
+               
+               Color pointColor(CurrentScene->Ambient().R() * objectMaterial.Ambient()._data[0],
+                                CurrentScene->Ambient().G() * objectMaterial.Ambient()._data[1],
+                                CurrentScene->Ambient().B() * objectMaterial.Ambient()._data[2]);
+               
                /*
-               float diffuse_x = 0, diffuse_y = 0, diffuse_z = 0;
                for (const auto& light : CurrentScene->Lights()) {
-                   // compute shadow ray
-                   Ray reverseIntersectRay(rayHitInfo.Position, light.Position() - rayHitInfo.Position);
                    
-                   Vector3 actualIntensity = light.Intensity() / (4 * M_PI * pow(reverseIntersectRay.Direction().length(), 2));
-                   float nl = (rayHitInfo.Normal._data[0] * reverseIntersectRay.Direction()._data[0])
-                                + (rayHitInfo.Normal._data[1] * reverseIntersectRay.Direction()._data[1])
-                                    + (rayHitInfo.Normal._data[2] * reverseIntersectRay.Direction()._data[2]);
-                   diffuse_x += actualIntensity._data[0] * nl;
-                   diffuse_y += actualIntensity._data[1] * nl;
-                   diffuse_z += actualIntensity._data[2] * nl;
+                   Vector3 normalDirection = rayHitInfo.Normal;
+                   Vector3 lightDirection = light.Position() - rayHitInfo.Position;
+                   lightDirection = lightDirection / lightDirection.length();
+                   float nlDot = normalDirection.dotProduct(lightDirection);
+                   //if (nlDot < 0) nlDot = 0;
+                   
+                   Vector3 visionDirection = _position - rayHitInfo.Position;
+                   Vector3 visionLight = visionDirection + lightDirection;
+                   Vector3 halfDirection = visionLight / visionLight.length();
+                   float nhDot = normalDirection.dotProduct(halfDirection);
+                   if (nhDot <= 0) nhDot = 0;
+                   
+                   Vector3 actualIntensity = light.Intensity() / (4 * M_PI * pow(lightDirection.length(), 2));
+                   
+                   pointColor = pointColor + objectMaterial.Calculate(actualIntensity, nlDot, nhDot);
+                   
                }
-               */
-               Color diffuseColor(diffuse_x, diffuse_y, diffuse_z);
-               outputImage.Pixel(h, w) = ambientColor + diffuseColor;
+                */
+               
+               outputImage.Pixel(h, w) = pointColor;
             }
         }
     }

@@ -25,6 +25,22 @@ public:
     /*
      * Implement a Calculate function that does Diffuse, Specular and Ambient, Reflective shading
      */
+    Color Calculate(Vector3 intensity, float nlDot, float nhDot) {
+        /*
+        // ambient
+        Vector3 ambientVector = _ambient * ambientIntensity;
+        Color ambientColor(ambientVector[0], ambientVector[1], ambientVector[2]);*/
+        
+        // diffuse
+        Vector3 diffuseVector = _diffuse * intensity * nlDot;
+        Color diffuseColor(diffuseVector[0], diffuseVector[1], diffuseVector[2]);
+        
+        // blinn-phong
+        Vector3 bpVector = _specular.rgb * intensity * pow(nhDot, _specular.phong);
+        Color bpColor(bpVector[0], bpVector[1], bpVector[2]);
+        
+        return diffuseColor + bpColor;
+    }
 
     friend std::istream& operator>>(std::istream& stream, Material& mat);
     
@@ -35,6 +51,14 @@ public:
     
     MaterialId MaterialID() const {
         return _materialID;
+    }
+    
+    Vector3 Ambient() const {
+        return _ambient;
+    }
+    
+    Vector3 Diffuse() const {
+        return _diffuse;
     }
 };
 
