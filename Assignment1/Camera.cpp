@@ -64,17 +64,25 @@ Image Camera::Render() const {
             float intersectionTime = __FLT_MAX__;
             
             RayHitInfo rayHitInfo;
+           /*
             for (const auto& sphere : CurrentScene->Spheres()) {
                 if (sphere.Intersect(viewingRay, rayHitInfo)) {
                     if (rayHitInfo.Parameter < intersectionTime) intersectionTime = rayHitInfo.Parameter;
                 }
-            }
+            }*/
            
+           // should work either way, why doesn't it? something to do with intersection time
            for (const auto& mesh : CurrentScene->Meshes()) {
                for (const auto& triangle : mesh._triangles) {
                    if (triangle.Intersect(viewingRay, rayHitInfo)) {
                        if (rayHitInfo.Parameter < intersectionTime) intersectionTime = rayHitInfo.Parameter;
                    }
+               }
+           }
+           
+           for (const auto& sphere : CurrentScene->Spheres()) {
+               if (sphere.Intersect(viewingRay, rayHitInfo)) {
+                   if (rayHitInfo.Parameter < intersectionTime) intersectionTime = rayHitInfo.Parameter;
                }
            }
            

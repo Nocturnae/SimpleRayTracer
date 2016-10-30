@@ -37,13 +37,14 @@ public:
         if (diffuseVector._data[1] >= 255) diffuseVector._data[1] = 255;
         if (diffuseVector._data[2] >= 255) diffuseVector._data[2] = 255;
         Color diffuseColor(diffuseVector[0], diffuseVector[1], diffuseVector[2]);
-        /*
+        
         // blinn-phong
+        // check if exceeds 255?
         Vector3 bpVector = _specular.rgb * intensity * pow(nhDot, _specular.phong);
         Color bpColor(bpVector[0], bpVector[1], bpVector[2]);
         
-        return diffuseColor + bpColor;*/
-        return diffuseColor;
+        return diffuseColor + bpColor;
+        //return diffuseColor;
     }
 
     friend std::istream& operator>>(std::istream& stream, Material& mat);

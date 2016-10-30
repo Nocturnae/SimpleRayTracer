@@ -37,30 +37,31 @@ inline bool Triangle::Intersect(const Ray& ray, RayHitInfo& hitInfo) const {
     float eihf = (e * i) - (h * f);
     float gfdi = (g * f) - (d * i);
     float jcal = (j * c) - (a * l);
-    
     float detA = (a * eihf) + (b * gfdi) + (c * dheg);
-    float beta = ((j * eihf) + (k * gfdi) + (l * dheg)) / detA;
-    float gamma = ((i * akjb) + (h * jcal) + (g * blkc)) / detA;
-    float t = -((f * akjb) + (e * jcal) + (d * blkc)) / detA;
     
-    // check t also?
+    float t = -((f * akjb) + (e * jcal) + (d * blkc)) / detA;
+    if (t < 0) return false;
+    
+    float gamma = ((i * akjb) + (h * jcal) + (g * blkc)) / detA;
     if ((gamma < 0) || (gamma > 1)) return false;
-    if ((beta < 0) || (beta > 1 - gamma)) return false;
-    else {
-        Vector3 p = rayOrigin + (rayDirection * t);
+    
+    float beta = ((j * eihf) + (k * gfdi) + (l * dheg)) / detA;
+    if ((beta < 0) || (beta > (1 - gamma))) return false;
+
+    Vector3 p = rayOrigin + (rayDirection * t);
         
-        Vector3 bc(x_c - x_b, y_c - y_b, z_c - z_b);
-        Vector3 ba(x_a - x_b, y_a - y_b, z_a - z_b);
+    Vector3 bc(x_c - x_b, y_c - y_b, z_c - z_b);
+    Vector3 ba(x_a - x_b, y_a - y_b, z_a - z_b);
         
-        hitInfo.Material = _material.MaterialID();
-        hitInfo.Position = p;
-        hitInfo.Normal = Vector3(bc._data[1] * ba._data[2] - bc._data[2] * ba._data[1],
-                                bc._data[0] * ba._data[2] - bc._data[2] * ba._data[0],
-                                 bc._data[0] * ba._data[1] - bc._data[1] * ba._data[0]);
-        hitInfo.Parameter = t;
+    hitInfo.Material = _material.MaterialID();
+    hitInfo.Position = p;
+    hitInfo.Normal = Vector3((bc._data[1] * ba._data[2]) - (bc._data[2] * ba._data[1]),
+                             (bc._data[0] * ba._data[2]) - (bc._data[2] * ba._data[0]),
+                             (bc._data[0] * ba._data[1]) - (bc._data[1] * ba._data[0]));
+    hitInfo.Normal = hitInfo.Normal / hitInfo.Normal.length();
+    hitInfo.Parameter = t;
         
-        return true;
-    }
+    return true;
 }
 
 #endif //RAYTRACER_TRIANGLE_H
