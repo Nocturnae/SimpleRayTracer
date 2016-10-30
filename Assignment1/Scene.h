@@ -56,6 +56,10 @@ public:
         return _ambient;
     }
     
+    int Reflectance() const {
+        return _rayReflect;
+    }
+    
     //////////////////////////////
     // READ SCENE FUNCTIONS HERE !
     //////////////////////////////

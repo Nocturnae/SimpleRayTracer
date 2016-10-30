@@ -16,11 +16,12 @@ Color Material::Calculate(Scene* CurrentScene, Vector3 viewDirection, Vector3 ra
                        CurrentScene->Ambient().G() * _ambient[1],
                        CurrentScene->Ambient().B() * _ambient[2]);
     
-    //if (depth > 2) return pointColor;
+    if (depth > CurrentScene->Reflectance()) return pointColor;
+    
+    Vector3 normalDirection = rayHitNormal;
     
     for (const auto& light : CurrentScene->Lights()) {
         
-        Vector3 normalDirection = rayHitNormal;
         Vector3 lightDirection = light.Position() - rayHitPosition;
         float lightDistance = lightDirection.length();
         lightDirection = lightDirection / lightDirection.length();
@@ -55,15 +56,16 @@ Color Material::Calculate(Scene* CurrentScene, Vector3 viewDirection, Vector3 ra
         if (inShadow) continue;
         
         float nlDot = normalDirection.dotProduct(lightDirection);
-        if (nlDot < 0) nlDot = 0;
+        if (nlDot < 0.001) nlDot = 0;
         
         Vector3 visionDirection = cameraPosition - rayHitPosition;
+        visionDirection = visionDirection / visionDirection.length();
         Vector3 visionLight = visionDirection + lightDirection;
         Vector3 halfDirection = visionLight / visionLight.length();
         float nhDot = normalDirection.dotProduct(halfDirection);
-        if (nhDot <= 0) nhDot = 0;
+        if (nhDot < 0.001) nhDot = 0;
         
-        Vector3 actualIntensity = light.Intensity() / (4 * M_PI * lightDistance * lightDistance);
+        Vector3 actualIntensity = light.Intensity() / (4 * M_PI * pow(lightDistance, 2));
         
         // diffuse
         Vector3 diffuseVector = _diffuse * actualIntensity * nlDot;
@@ -75,6 +77,9 @@ Color Material::Calculate(Scene* CurrentScene, Vector3 viewDirection, Vector3 ra
         // blinn-phong
         // check if exceeds 255?
         Vector3 bpVector = _specular.rgb * actualIntensity * pow(nhDot, _specular.phong);
+        if (bpVector._data[0] >= 255) bpVector._data[0] = 255;
+        if (bpVector._data[1] >= 255) bpVector._data[1] = 255;
+        if (bpVector._data[2] >= 255) bpVector._data[2] = 255;
         Color bpColor(bpVector[0], bpVector[1], bpVector[2]);
         
         // reflective

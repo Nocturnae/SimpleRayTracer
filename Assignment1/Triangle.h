@@ -40,13 +40,13 @@ inline bool Triangle::Intersect(const Ray& ray, RayHitInfo& hitInfo) const {
     float detA = (a * eihf) + (b * gfdi) + (c * dheg);
     
     float t = -((f * akjb) + (e * jcal) + (d * blkc)) / detA;
-    if (t < 0) return false;
+    if (t < 0.0001) return false;
     
     float gamma = ((i * akjb) + (h * jcal) + (g * blkc)) / detA;
-    if ((gamma < 0) || (gamma > 1)) return false;
+    if ((gamma < 0.0001) || (gamma - 1 > 0.0001)) return false;
     
     float beta = ((j * eihf) + (k * gfdi) + (l * dheg)) / detA;
-    if ((beta < 0) || (beta > (1 - gamma))) return false;
+    if ((beta < 0.0001) || (beta > (1 - gamma))) return false;
 
     Vector3 p = rayOrigin + (rayDirection * t);
         
