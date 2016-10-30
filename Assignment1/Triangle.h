@@ -5,9 +5,10 @@
 
 class Triangle
 {
+    Material _material;
 public:
     Vertex _vertices[3];
-    Triangle(Vertex v1, Vertex v2, Vertex v3) {
+    Triangle(Material material, Vertex v1, Vertex v2, Vertex v3) : _material(material) {
         _vertices[0] = v1;
         _vertices[1] = v2;
         _vertices[2] = v3;
@@ -48,9 +49,14 @@ inline bool Triangle::Intersect(const Ray& ray, RayHitInfo& hitInfo) const {
     else {
         Vector3 p = rayOrigin + (rayDirection * t);
         
-        //hitInfo.Material = ;
+        Vector3 bc(x_c - x_b, y_c - y_b, z_c - z_b);
+        Vector3 ba(x_a - x_b, y_a - y_b, z_a - z_b);
+        
+        hitInfo.Material = _material.MaterialID();
         hitInfo.Position = p;
-        //hitInfo.Normal =
+        hitInfo.Normal = Vector3(bc._data[1] * ba._data[2] - bc._data[2] * ba._data[1],
+                                bc._data[0] * ba._data[2] - bc._data[2] * ba._data[0],
+                                 bc._data[0] * ba._data[1] - bc._data[1] * ba._data[0]);
         hitInfo.Parameter = t;
         
         return true;

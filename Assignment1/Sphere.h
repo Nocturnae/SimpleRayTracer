@@ -36,16 +36,17 @@ inline bool Sphere::Intersect(const Ray& ray, RayHitInfo& hitInfo) const {
     Vector3 sphereCenter = _center.Position() - rayOrigin;
     Vector3 ec = sphereCenter * -1;*/
     float dd = rayDirection.dotProduct(rayDirection);
-    /*float A = dd / 2;
+    float A = dd / 2;
     float B = rayDirection.dotProduct(ec);
     float B2 = pow(B, 2);
-    float AC4 = dd * (ec.dotProduct(ec) - pow(_radius, 2));*/
+    float AC4 = dd * (ec.dotProduct(ec) - pow(_radius, 2));
+    /*
     Vector3 oc = rayOrigin - sphereCenter;
     float A = dd;
     float B = 2 * rayDirection.dotProduct(oc);
     float C = oc.dotProduct(oc) - pow(_radius, 2);
     float B2 = pow(B, 2);
-    float AC4 = 4 * A * C;
+    float AC4 = 4 * A * C;*/
     float delta = B2 - AC4;
     
     if (delta <= 0) return false;
@@ -62,6 +63,8 @@ inline bool Sphere::Intersect(const Ray& ray, RayHitInfo& hitInfo) const {
         
         hitInfo.Material = _material.MaterialID();
         hitInfo.Position = p;
+        /*hitInfo.Position = Vector3(250, 250, 250);
+        hitInfo.Position = hitInfo.Position / hitInfo.Position.length();*/
         hitInfo.Normal = (p - sphereCenter) / _radius;
         //hitInfo.Normal = (p - sphereCenter) * 2;
         hitInfo.Parameter = t;

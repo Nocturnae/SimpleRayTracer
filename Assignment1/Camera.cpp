@@ -69,14 +69,14 @@ Image Camera::Render() const {
                     if (rayHitInfo.Parameter < intersectionTime) intersectionTime = rayHitInfo.Parameter;
                 }
             }
-           /*
+           
            for (const auto& mesh : CurrentScene->Meshes()) {
                for (const auto& triangle : mesh._triangles) {
                    if (triangle.Intersect(viewingRay, rayHitInfo)) {
                        if (rayHitInfo.Parameter < intersectionTime) intersectionTime = rayHitInfo.Parameter;
                    }
                }
-           }*/
+           }
            
            if (intersectionTime < __FLT_MAX__) {
                Material objectMaterial = CurrentScene->getMaterial(rayHitInfo.Material);
@@ -89,6 +89,7 @@ Image Camera::Render() const {
                    
                    Vector3 normalDirection = rayHitInfo.Normal;
                    Vector3 lightDirection = light.Position() - rayHitInfo.Position;
+                   float lightDistance = lightDirection.length();
                    lightDirection = lightDirection / lightDirection.length();
                    float nlDot = normalDirection.dotProduct(lightDirection);
                    if (nlDot < 0) nlDot = 0;
@@ -99,7 +100,8 @@ Image Camera::Render() const {
                    float nhDot = normalDirection.dotProduct(halfDirection);
                    if (nhDot <= 0) nhDot = 0;
                    
-                   Vector3 actualIntensity = light.Intensity() / (4 * M_PI * pow(lightDirection.length(), 2));
+                   //Vector3 actualIntensity = light.Intensity() / (4 * M_PI * pow(lightDirection.length(), 2));
+                   Vector3 actualIntensity = light.Intensity() / (4 * M_PI * lightDistance * lightDistance);
                    
                    pointColor = pointColor + objectMaterial.Calculate(actualIntensity, nlDot, nhDot);
                    

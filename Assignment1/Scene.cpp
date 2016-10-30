@@ -128,7 +128,7 @@ void ReadScene(int argc, char** argv)
                     Vertex v2 = CurrentScene->getVertex(vid2);
                     Vertex v3 = CurrentScene->getVertex(vid3);
                     
-                    Triangle triangle(v1, v2, v3);
+                    Triangle triangle(material, v1, v2, v3);
                     triangles.push_back(triangle);
                 }
                 

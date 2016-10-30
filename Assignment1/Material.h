@@ -33,6 +33,9 @@ public:
         
         // diffuse
         Vector3 diffuseVector = _diffuse * intensity * nlDot;
+        if (diffuseVector._data[0] >= 255) diffuseVector._data[0] = 255;
+        if (diffuseVector._data[1] >= 255) diffuseVector._data[1] = 255;
+        if (diffuseVector._data[2] >= 255) diffuseVector._data[2] = 255;
         Color diffuseColor(diffuseVector[0], diffuseVector[1], diffuseVector[2]);
         /*
         // blinn-phong
