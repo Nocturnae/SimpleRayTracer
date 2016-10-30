@@ -64,30 +64,43 @@ Image Camera::Render() const {
             float intersectionTime = __FLT_MAX__;
             
             RayHitInfo rayHitInfo;
-           /*
+           
+           MaterialId rayHitMaterial = 0;
+           Vector3 rayHitPosition, rayHitNormal;
+           
             for (const auto& sphere : CurrentScene->Spheres()) {
                 if (sphere.Intersect(viewingRay, rayHitInfo)) {
-                    if (rayHitInfo.Parameter < intersectionTime) intersectionTime = rayHitInfo.Parameter;
+                    if (rayHitInfo.Parameter < intersectionTime) {
+                        rayHitMaterial = rayHitInfo.Material;
+                        rayHitPosition = rayHitInfo.Position;
+                        rayHitNormal = rayHitInfo.Normal;
+                        intersectionTime = rayHitInfo.Parameter;
+                    }
                 }
-            }*/
+            }
            
            // should work either way, why doesn't it? something to do with intersection time
            for (const auto& mesh : CurrentScene->Meshes()) {
                for (const auto& triangle : mesh._triangles) {
                    if (triangle.Intersect(viewingRay, rayHitInfo)) {
-                       if (rayHitInfo.Parameter < intersectionTime) intersectionTime = rayHitInfo.Parameter;
+                       if (rayHitInfo.Parameter < intersectionTime) {
+                           rayHitMaterial = rayHitInfo.Material;
+                           rayHitPosition = rayHitInfo.Position;
+                           rayHitNormal = rayHitInfo.Normal;
+                           intersectionTime = rayHitInfo.Parameter;
+                       }
                    }
                }
            }
-           
+           /*
            for (const auto& sphere : CurrentScene->Spheres()) {
                if (sphere.Intersect(viewingRay, rayHitInfo)) {
                    if (rayHitInfo.Parameter < intersectionTime) intersectionTime = rayHitInfo.Parameter;
                }
-           }
+           }*/
            
            if (intersectionTime < __FLT_MAX__) {
-               Material objectMaterial = CurrentScene->getMaterial(rayHitInfo.Material);
+               Material objectMaterial = CurrentScene->getMaterial(rayHitMaterial);
                
                Color pointColor(CurrentScene->Ambient().R() * objectMaterial.Ambient()._data[0],
                                 CurrentScene->Ambient().G() * objectMaterial.Ambient()._data[1],
@@ -95,14 +108,14 @@ Image Camera::Render() const {
                
                for (const auto& light : CurrentScene->Lights()) {
                    
-                   Vector3 normalDirection = rayHitInfo.Normal;
-                   Vector3 lightDirection = light.Position() - rayHitInfo.Position;
+                   Vector3 normalDirection = rayHitNormal;
+                   Vector3 lightDirection = light.Position() - rayHitPosition;
                    float lightDistance = lightDirection.length();
                    lightDirection = lightDirection / lightDirection.length();
                    float nlDot = normalDirection.dotProduct(lightDirection);
                    if (nlDot < 0) nlDot = 0;
                    
-                   Vector3 visionDirection = _position - rayHitInfo.Position;
+                   Vector3 visionDirection = _position - rayHitPosition;
                    Vector3 visionLight = visionDirection + lightDirection;
                    Vector3 halfDirection = visionLight / visionLight.length();
                    float nhDot = normalDirection.dotProduct(halfDirection);
