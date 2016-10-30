@@ -51,6 +51,7 @@ inline bool Triangle::Intersect(const Ray& ray, RayHitInfo& hitInfo) const {
         //hitInfo.Material = ;
         hitInfo.Position = p;
         //hitInfo.Normal =
+        hitInfo.Parameter = t;
         
         return true;
     }

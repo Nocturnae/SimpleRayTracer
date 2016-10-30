@@ -34,12 +34,13 @@ public:
         // diffuse
         Vector3 diffuseVector = _diffuse * intensity * nlDot;
         Color diffuseColor(diffuseVector[0], diffuseVector[1], diffuseVector[2]);
-        
+        /*
         // blinn-phong
         Vector3 bpVector = _specular.rgb * intensity * pow(nhDot, _specular.phong);
         Color bpColor(bpVector[0], bpVector[1], bpVector[2]);
         
-        return diffuseColor + bpColor;
+        return diffuseColor + bpColor;*/
+        return diffuseColor;
     }
 
     friend std::istream& operator>>(std::istream& stream, Material& mat);
