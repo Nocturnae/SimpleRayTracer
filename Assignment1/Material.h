@@ -5,6 +5,7 @@
 #include "Vector3.h"
 
 class Scene;
+class Ray;
 
 using MaterialId = int;
 
@@ -25,7 +26,7 @@ public:
     /*
      * Implement a Calculate function that does Diffuse, Specular and Ambient, Reflective shading
      */
-    Color Calculate(Scene* CurrentScene, Vector3 rayHitPosition, Vector3 rayHitNormal, Vector3 cameraPosition);
+    Color Calculate(Scene* CurrentScene, Vector3 viewDirection, Vector3 rayHitPosition, Vector3 rayHitNormal, Vector3 cameraPosition, int depth);
 
     friend std::istream& operator>>(std::istream& stream, Material& mat);
     

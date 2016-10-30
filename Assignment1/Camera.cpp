@@ -18,8 +18,7 @@ Camera::Camera(int cameraID, Vector3 position, Vector3 gaze, Vector3 up, float l
     // _space
     _space.Forward = gaze / gaze.length();
     _space.Up = up /  up.length();
-    /*_space.Forward = gaze;
-    _space.Up = up;*/
+    
     _space.Left._data[0] = (up._data[1] * gaze._data[2]) - (up._data[2] * gaze._data[1]);
     _space.Left._data[1] = (up._data[2] * gaze._data[0]) - (up._data[0] * gaze._data[2]);
     _space.Left._data[2] = (up._data[0] * gaze._data[1]) - (up._data[1] * gaze._data[0]);
@@ -89,8 +88,7 @@ Image Camera::Render() const {
            
            if (intersectionTime < __FLT_MAX__) {
                Material objectMaterial = CurrentScene->getMaterial(rayHitMaterial);
-               pointColor = objectMaterial.Calculate(CurrentScene, rayHitPosition, rayHitNormal, _position);
-               
+               pointColor = objectMaterial.Calculate(CurrentScene, rayDirection, rayHitPosition, rayHitNormal, _position, 0);
            }
            
            outputImage.Pixel(h, w) = pointColor;

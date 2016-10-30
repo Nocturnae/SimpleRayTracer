@@ -9,11 +9,14 @@
 #include "Material.h"
 #include "Scene.h"
 
-Color Material::Calculate(Scene* CurrentScene, Vector3 rayHitPosition, Vector3 rayHitNormal, Vector3 cameraPosition) {
+Color Material::Calculate(Scene* CurrentScene, Vector3 viewDirection, Vector3 rayHitPosition, Vector3 rayHitNormal, Vector3 cameraPosition, int depth) {
+    
     // ambient
     Color pointColor(CurrentScene->Ambient().R() * _ambient[0],
                        CurrentScene->Ambient().G() * _ambient[1],
                        CurrentScene->Ambient().B() * _ambient[2]);
+    
+    //if (depth > 2) return pointColor;
     
     for (const auto& light : CurrentScene->Lights()) {
         
@@ -61,12 +64,6 @@ Color Material::Calculate(Scene* CurrentScene, Vector3 rayHitPosition, Vector3 r
         if (nhDot <= 0) nhDot = 0;
         
         Vector3 actualIntensity = light.Intensity() / (4 * M_PI * lightDistance * lightDistance);
-        /*
-         Vector3 rayOrigin = viewingRay.Origin(), rayDirection = viewingRay.Direction();
-         Vector3 reflectedDirection = rayDirection - (rayHitNormal * 2 * rayDirection.dotProduct(rayHitNormal));
-         reflectedDirection = reflectedDirection / reflectedDirection.length();
-         Ray reflectedRay(rayHitPosition, reflectedDirection);
-     */
         
         // diffuse
         Vector3 diffuseVector = _diffuse * actualIntensity * nlDot;
@@ -79,6 +76,49 @@ Color Material::Calculate(Scene* CurrentScene, Vector3 rayHitPosition, Vector3 r
         // check if exceeds 255?
         Vector3 bpVector = _specular.rgb * actualIntensity * pow(nhDot, _specular.phong);
         Color bpColor(bpVector[0], bpVector[1], bpVector[2]);
+        
+        // reflective
+        if (_reflectance.length() != 0) {
+            Vector3 reflectDirection = viewDirection - (rayHitNormal * viewDirection.dotProduct(rayHitNormal) * 2);
+            reflectDirection = reflectDirection / reflectDirection.length();
+            Ray reflectRay(rayHitPosition, reflectDirection);
+            RayHitInfo reflectHitInfo;
+            
+            float intersectionTime = __FLT_MAX__;
+            
+            MaterialId reflectHitMaterial = 0;
+            Vector3 reflectHitPosition, reflectHitNormal;
+            
+            // weird black dots, fix
+            for (const auto& sphere : CurrentScene->Spheres()) {
+                if (sphere.Intersect(reflectRay, reflectHitInfo)) {
+                    if ((reflectHitInfo.Parameter < intersectionTime) && (reflectHitInfo.Parameter > 0.0001)) {
+                        reflectHitMaterial = reflectHitInfo.Material;
+                        reflectHitPosition = reflectHitInfo.Position;
+                        reflectHitNormal = reflectHitInfo.Normal;
+                        intersectionTime = reflectHitInfo.Parameter;
+                    }
+                }
+            }
+            
+            for (const auto& mesh : CurrentScene->Meshes()) {
+                for (const auto& triangle : mesh._triangles) {
+                    if (triangle.Intersect(reflectRay, reflectHitInfo)) {
+                        if ((reflectHitInfo.Parameter < intersectionTime) && (reflectHitInfo.Parameter > 0.0001)) {
+                            reflectHitMaterial = reflectHitInfo.Material;
+                            reflectHitPosition = reflectHitInfo.Position;
+                            reflectHitNormal = reflectHitInfo.Normal;
+                            intersectionTime = reflectHitInfo.Parameter;
+                        }
+                    }
+                }
+            }
+            
+            if (intersectionTime < __FLT_MAX__) {
+                Material objectMaterial = CurrentScene->getMaterial(reflectHitMaterial);
+                pointColor = pointColor + objectMaterial.Calculate(CurrentScene, reflectDirection, reflectHitPosition, reflectHitNormal, rayHitPosition, depth + 1);
+            }
+        }
         
         pointColor = pointColor + diffuseColor + bpColor;
         
