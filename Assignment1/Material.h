@@ -43,6 +43,9 @@ public:
         Vector3 bpVector = _specular.rgb * intensity * pow(nhDot, _specular.phong);
         Color bpColor(bpVector[0], bpVector[1], bpVector[2]);
         
+        // reflective
+        
+        
         return diffuseColor + bpColor;
         //return diffuseColor;
     }

@@ -112,6 +112,36 @@ Image Camera::Render() const {
                    Vector3 lightDirection = light.Position() - rayHitPosition;
                    float lightDistance = lightDirection.length();
                    lightDirection = lightDirection / lightDirection.length();
+                   
+                   // intersect lightDirection with all objects to check if in shadow
+                   Ray shadowRay(rayHitPosition, lightDirection);
+                   RayHitInfo shadowHitInfo;
+                   
+                   bool inShadow = false;
+                   
+                   for (const auto& mesh : CurrentScene->Meshes()) {
+                       if (inShadow) break;
+                       for (const auto& triangle : mesh._triangles) {
+                           if (triangle.Intersect(shadowRay, shadowHitInfo)) {
+                               if (shadowHitInfo.Parameter > 0.0001) {
+                                   inShadow = true;
+                                   break;
+                               }
+                           }
+                       }
+                   }
+                   
+                   for (const auto& sphere : CurrentScene->Spheres()) {
+                       if (sphere.Intersect(shadowRay, shadowHitInfo)) {
+                           if (shadowHitInfo.Parameter > 0.0001) {
+                               inShadow = true;
+                               break;
+                           }
+                       }
+                   }
+                   
+                   if (inShadow) continue;
+                   
                    float nlDot = normalDirection.dotProduct(lightDirection);
                    if (nlDot < 0) nlDot = 0;
                    
