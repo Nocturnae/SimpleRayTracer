@@ -25,30 +25,7 @@ public:
     /*
      * Implement a Calculate function that does Diffuse, Specular and Ambient, Reflective shading
      */
-    Color Calculate(Vector3 intensity, float nlDot, float nhDot) {
-        /*
-        // ambient
-        Vector3 ambientVector = _ambient * ambientIntensity;
-        Color ambientColor(ambientVector[0], ambientVector[1], ambientVector[2]);*/
-        
-        // diffuse
-        Vector3 diffuseVector = _diffuse * intensity * nlDot;
-        if (diffuseVector._data[0] >= 255) diffuseVector._data[0] = 255;
-        if (diffuseVector._data[1] >= 255) diffuseVector._data[1] = 255;
-        if (diffuseVector._data[2] >= 255) diffuseVector._data[2] = 255;
-        Color diffuseColor(diffuseVector[0], diffuseVector[1], diffuseVector[2]);
-        
-        // blinn-phong
-        // check if exceeds 255?
-        Vector3 bpVector = _specular.rgb * intensity * pow(nhDot, _specular.phong);
-        Color bpColor(bpVector[0], bpVector[1], bpVector[2]);
-        
-        // reflective
-        
-        
-        return diffuseColor + bpColor;
-        //return diffuseColor;
-    }
+    Color Calculate(Scene* CurrentScene, Vector3 rayHitPosition, Vector3 rayHitNormal, Vector3 cameraPosition);
 
     friend std::istream& operator>>(std::istream& stream, Material& mat);
     

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		217BBF5E1DC6767B0062FA5F /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 217BBF5D1DC6767B0062FA5F /* Material.cpp */; };
 		2189990C1DBF69AA0007677E /* Image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 218998FD1DBF69AA0007677E /* Image.cpp */; };
 		2189990D1DBF69AA0007677E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 218999001DBF69AA0007677E /* main.cpp */; };
 		2189990E1DBF69AA0007677E /* Makefile in Sources */ = {isa = PBXBuildFile; fileRef = 218999011DBF69AA0007677E /* Makefile */; };
@@ -27,6 +28,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		217BBF5D1DC6767B0062FA5F /* Material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
 		218998D51DBF65830007677E /* Assignment1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Assignment1; sourceTree = BUILT_PRODUCTS_DIR; };
 		218998FA1DBF69AA0007677E /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		218998FB1DBF69AA0007677E /* cameras */ = {isa = PBXFileReference; lastKnownFileType = folder; path = cameras; sourceTree = "<group>"; };
@@ -91,6 +93,7 @@
 				218999011DBF69AA0007677E /* Makefile */,
 				218999001DBF69AA0007677E /* main.cpp */,
 				218999021DBF69AA0007677E /* Material.h */,
+				217BBF5D1DC6767B0062FA5F /* Material.cpp */,
 				218999031DBF69AA0007677E /* Mesh.h */,
 				218999041DBF69AA0007677E /* PointLight.h */,
 				218999051DBF69AA0007677E /* Ray.h */,
@@ -163,6 +166,7 @@
 			files = (
 				21FF01B71DC1354B0087570E /* Camera.cpp in Sources */,
 				2189990E1DBF69AA0007677E /* Makefile in Sources */,
+				217BBF5E1DC6767B0062FA5F /* Material.cpp in Sources */,
 				2189990D1DBF69AA0007677E /* main.cpp in Sources */,
 				21F7340E1DC28AF2008CCD6B /* Scene.cpp in Sources */,
 				2189990C1DBF69AA0007677E /* Image.cpp in Sources */,

@@ -2,6 +2,7 @@
 #define RAYTRACER_CAMERA_H
 
 #include "Vector3.h"
+#include "Ray.h"
 #include "Image.h"
 
 class Camera {
@@ -36,6 +37,8 @@ public:
     {
         return _outputFile;
     }
+    
+    Color ColorPoint(Ray& viewingRay) const;
 };
 
 #endif //RAYTRACER_CAMERA_H
