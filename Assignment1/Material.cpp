@@ -1,11 +1,3 @@
-//
-//  Material.cpp
-//  Assignment1
-//
-//  Created by Zeynep Akkalyoncu on 30/10/16.
-//  Copyright © 2016 Zeynep Akkalyoncu. All rights reserved.
-//
-
 #include "Material.h"
 #include "Scene.h"
 
@@ -85,11 +77,7 @@ Color Material::Calculate(Scene* CurrentScene, Vector3 viewDirection, Vector3 ra
         
         pointColor = pointColor + bpColor;
     
-        
         //pointColor = pointColor + diffuseColor + bpColor;
-        if (pointColor.R() > 255) std::cout << "r" << std::endl;
-         if (pointColor.G() > 255) std::cout << "g" << std::endl;
-         if (pointColor.B() > 255) std::cout << "b" << std::endl;
     }
     
     // reflective

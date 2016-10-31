@@ -1,11 +1,3 @@
-//
-//  Camera.cpp
-//  Assignment1
-//
-//  Created by Zeynep Akkalyoncu on 26/10/16.
-//  Copyright © 2016 Zeynep Akkalyoncu. All rights reserved.
-//
-
 #include <stdio.h>
 #include "Scene.h"
 #include "Camera.h"

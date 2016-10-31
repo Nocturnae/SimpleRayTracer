@@ -47,6 +47,7 @@ inline bool Sphere::Intersect(const Ray& ray, RayHitInfo& hitInfo) const {
         float t;
         
         if (t < 0) return false;
+        // changed
         if (t1 <= t2) t = t1;
         else t = t2;
         

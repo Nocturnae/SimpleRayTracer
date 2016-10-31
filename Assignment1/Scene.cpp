@@ -1,11 +1,3 @@
-//
-//  Scene.cpp
-//  Assignment1
-//
-//  Created by Zeynep Akkalyoncu on 27/10/16.
-//  Copyright © 2016 Zeynep Akkalyoncu. All rights reserved.
-//
-
 #include "Scene.h"
 
 Scene* CurrentScene;
@@ -116,7 +108,6 @@ void ReadScene(int argc, char** argv)
                 
                 int materialID;
                 scene_file >> materialID;
-                // not sure if it works this way?
                 Material material = CurrentScene->getMaterial(materialID);
                 
                 std::vector<Triangle> triangles;
@@ -141,7 +132,6 @@ void ReadScene(int argc, char** argv)
                 
                 int materialID;
                 scene_file >> materialID;
-                // not sure if it works this way?
                 Material material = CurrentScene->getMaterial(materialID);
                 
                 float radius;

@@ -22,7 +22,6 @@ inline bool Triangle::Intersect(const Ray& ray, RayHitInfo& hitInfo) const {
     Vector3 rayDirection = ray.Direction();
     Vector3 rayOrigin = ray.Origin();
     
-    // check calculations
     float a_x = _vertices[0].Position()._data[0], b_x = _vertices[1].Position()._data[0], c_x = _vertices[2].Position()._data[0];
     float a_y = _vertices[0].Position()._data[1], b_y = _vertices[1].Position()._data[1], c_y = _vertices[2].Position()._data[1];
     float a_z = _vertices[0].Position()._data[2], b_z = _vertices[1].Position()._data[2], c_z = _vertices[2].Position()._data[2];
