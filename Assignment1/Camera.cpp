@@ -65,7 +65,7 @@ Image Camera::Render() const {
            
            for (const auto& sphere : CurrentScene->Spheres()) {
                if (sphere.Intersect(viewingRay, rayHitInfo)) {
-                   if (rayHitInfo.Parameter < intersectionTime) {
+                   if ((rayHitInfo.Parameter < intersectionTime) && (rayHitInfo.Parameter > 0)) {
                        rayHitMaterial = rayHitInfo.Material;
                        rayHitPosition = rayHitInfo.Position;
                        rayHitNormal = rayHitInfo.Normal;
@@ -77,7 +77,7 @@ Image Camera::Render() const {
            for (const auto& mesh : CurrentScene->Meshes()) {
                for (const auto& triangle : mesh._triangles) {
                    if (triangle.Intersect(viewingRay, rayHitInfo)) {
-                       if (rayHitInfo.Parameter < intersectionTime) {
+                       if ((rayHitInfo.Parameter < intersectionTime) && (rayHitInfo.Parameter > 0)) {
                            rayHitMaterial = rayHitInfo.Material;
                            rayHitPosition = rayHitInfo.Position;
                            rayHitNormal = rayHitInfo.Normal;

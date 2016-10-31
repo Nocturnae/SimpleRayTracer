@@ -18,9 +18,6 @@ Color Material::Calculate(Scene* CurrentScene, Vector3 viewDirection, Vector3 ra
                        CurrentScene->Ambient().G() * _ambient[1],
                        CurrentScene->Ambient().B() * _ambient[2]);
     
-   //if (depth > CurrentScene->Reflectance()) return pointColor;
-    //if (depth > 1) return pointColor;
-    
     Vector3 normalDirection = rayHitNormal;
     
     for (const auto& light : CurrentScene->Lights()) {
@@ -39,7 +36,7 @@ Color Material::Calculate(Scene* CurrentScene, Vector3 viewDirection, Vector3 ra
             if (inShadow) break;
             for (const auto& triangle : mesh._triangles) {
                 if (triangle.Intersect(shadowRay, shadowHitInfo)) {
-                    if (shadowHitInfo.Parameter > 0.001) {
+                    if ((shadowHitInfo.Parameter > 0.001) && (shadowHitInfo.Parameter < lightDistance)) {
                         inShadow = true;
                         break;
                     }
@@ -49,7 +46,7 @@ Color Material::Calculate(Scene* CurrentScene, Vector3 viewDirection, Vector3 ra
         
         for (const auto& sphere : CurrentScene->Spheres()) {
             if (sphere.Intersect(shadowRay, shadowHitInfo)) {
-                if (shadowHitInfo.Parameter > 0.001) {
+                if ((shadowHitInfo.Parameter > 0.001) && (shadowHitInfo.Parameter < lightDistance)) {
                     inShadow = true;
                     break;
                 }
