@@ -12,7 +12,6 @@ public:
     std::vector<Triangle> _triangles;
     Mesh(int meshID, Material material, std::vector<Triangle> triangles) : _material(material) {
         _meshID = meshID;
-        //for (int i = 0; i < triangles.size(); i++) _triangles[i] = triangles[i];
         _triangles = triangles;
     }
 };

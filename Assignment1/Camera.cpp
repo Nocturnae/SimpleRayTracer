@@ -15,6 +15,7 @@ Camera::Camera(int cameraID, Vector3 position, Vector3 gaze, Vector3 up, float l
     _cameraID = cameraID;
     _position = position;
     _gaze = gaze;
+    
     // _space
     _space.Forward = gaze / gaze.length();
     _space.Up = up /  up.length();

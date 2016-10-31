@@ -16,7 +16,8 @@ Color Material::Calculate(Scene* CurrentScene, Vector3 viewDirection, Vector3 ra
                        CurrentScene->Ambient().G() * _ambient[1],
                        CurrentScene->Ambient().B() * _ambient[2]);
     
-    if (depth > CurrentScene->Reflectance()) return pointColor;
+   if (depth > CurrentScene->Reflectance()) return pointColor;
+    //if (depth > 1) return pointColor;
     
     Vector3 normalDirection = rayHitNormal;
     
@@ -26,7 +27,7 @@ Color Material::Calculate(Scene* CurrentScene, Vector3 viewDirection, Vector3 ra
         float lightDistance = lightDirection.length();
         lightDirection = lightDirection / lightDirection.length();
         
-        // intersect lightDirection with all objects to check if in shadow
+        // shadow
         Ray shadowRay(rayHitPosition, lightDirection);
         RayHitInfo shadowHitInfo;
         
@@ -36,7 +37,7 @@ Color Material::Calculate(Scene* CurrentScene, Vector3 viewDirection, Vector3 ra
             if (inShadow) break;
             for (const auto& triangle : mesh._triangles) {
                 if (triangle.Intersect(shadowRay, shadowHitInfo)) {
-                    if (shadowHitInfo.Parameter > 0.0001) {
+                    if (shadowHitInfo.Parameter > 0.001) {
                         inShadow = true;
                         break;
                     }
@@ -46,7 +47,7 @@ Color Material::Calculate(Scene* CurrentScene, Vector3 viewDirection, Vector3 ra
         
         for (const auto& sphere : CurrentScene->Spheres()) {
             if (sphere.Intersect(shadowRay, shadowHitInfo)) {
-                if (shadowHitInfo.Parameter > 0.0001) {
+                if (shadowHitInfo.Parameter > 0.001) {
                     inShadow = true;
                     break;
                 }
@@ -56,14 +57,14 @@ Color Material::Calculate(Scene* CurrentScene, Vector3 viewDirection, Vector3 ra
         if (inShadow) continue;
         
         float nlDot = normalDirection.dotProduct(lightDirection);
-        if (nlDot < 0.001) nlDot = 0;
+        if (nlDot < 0) nlDot = 0;
         
         Vector3 visionDirection = cameraPosition - rayHitPosition;
         visionDirection = visionDirection / visionDirection.length();
         Vector3 visionLight = visionDirection + lightDirection;
         Vector3 halfDirection = visionLight / visionLight.length();
         float nhDot = normalDirection.dotProduct(halfDirection);
-        if (nhDot < 0.001) nhDot = 0;
+        if (nhDot < 0) nhDot = 0;
         
         Vector3 actualIntensity = light.Intensity() / (4 * M_PI * pow(lightDistance, 2));
         
@@ -75,7 +76,6 @@ Color Material::Calculate(Scene* CurrentScene, Vector3 viewDirection, Vector3 ra
         Color diffuseColor(diffuseVector[0], diffuseVector[1], diffuseVector[2]);
         
         // blinn-phong
-        // check if exceeds 255?
         Vector3 bpVector = _specular.rgb * actualIntensity * pow(nhDot, _specular.phong);
         if (bpVector._data[0] >= 255) bpVector._data[0] = 255;
         if (bpVector._data[1] >= 255) bpVector._data[1] = 255;
@@ -94,10 +94,9 @@ Color Material::Calculate(Scene* CurrentScene, Vector3 viewDirection, Vector3 ra
             MaterialId reflectHitMaterial = 0;
             Vector3 reflectHitPosition, reflectHitNormal;
             
-            // weird black dots, fix
             for (const auto& sphere : CurrentScene->Spheres()) {
                 if (sphere.Intersect(reflectRay, reflectHitInfo)) {
-                    if ((reflectHitInfo.Parameter < intersectionTime) && (reflectHitInfo.Parameter > 0.0001)) {
+                    if ((reflectHitInfo.Parameter < intersectionTime) && (reflectHitInfo.Parameter > 0.001)) {
                         reflectHitMaterial = reflectHitInfo.Material;
                         reflectHitPosition = reflectHitInfo.Position;
                         reflectHitNormal = reflectHitInfo.Normal;
@@ -109,7 +108,7 @@ Color Material::Calculate(Scene* CurrentScene, Vector3 viewDirection, Vector3 ra
             for (const auto& mesh : CurrentScene->Meshes()) {
                 for (const auto& triangle : mesh._triangles) {
                     if (triangle.Intersect(reflectRay, reflectHitInfo)) {
-                        if ((reflectHitInfo.Parameter < intersectionTime) && (reflectHitInfo.Parameter > 0.0001)) {
+                        if ((reflectHitInfo.Parameter < intersectionTime) && (reflectHitInfo.Parameter > 0.001)) {
                             reflectHitMaterial = reflectHitInfo.Material;
                             reflectHitPosition = reflectHitInfo.Position;
                             reflectHitNormal = reflectHitInfo.Normal;
