@@ -31,11 +31,9 @@
 		217BBF5D1DC6767B0062FA5F /* Material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
 		218998D51DBF65830007677E /* Assignment1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Assignment1; sourceTree = BUILT_PRODUCTS_DIR; };
 		218998FA1DBF69AA0007677E /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
-		218998FB1DBF69AA0007677E /* cameras */ = {isa = PBXFileReference; lastKnownFileType = folder; path = cameras; sourceTree = "<group>"; };
 		218998FC1DBF69AA0007677E /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
 		218998FD1DBF69AA0007677E /* Image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Image.cpp; sourceTree = "<group>"; };
 		218998FE1DBF69AA0007677E /* Image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Image.h; sourceTree = "<group>"; };
-		218998FF1DBF69AA0007677E /* images */ = {isa = PBXFileReference; lastKnownFileType = folder; path = images; sourceTree = "<group>"; };
 		218999001DBF69AA0007677E /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		218999011DBF69AA0007677E /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; path = Makefile; sourceTree = "<group>"; };
 		218999021DBF69AA0007677E /* Material.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Material.h; sourceTree = "<group>"; };
@@ -43,11 +41,13 @@
 		218999041DBF69AA0007677E /* PointLight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PointLight.h; sourceTree = "<group>"; };
 		218999051DBF69AA0007677E /* Ray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ray.h; sourceTree = "<group>"; };
 		218999061DBF69AA0007677E /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Scene.h; sourceTree = "<group>"; };
-		218999071DBF69AA0007677E /* scenes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scenes; sourceTree = "<group>"; };
 		218999081DBF69AA0007677E /* Sphere.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sphere.h; sourceTree = "<group>"; };
 		218999091DBF69AA0007677E /* Triangle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Triangle.h; sourceTree = "<group>"; };
 		2189990A1DBF69AA0007677E /* Vector3.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vector3.h; sourceTree = "<group>"; };
 		2189990B1DBF69AA0007677E /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vertex.h; sourceTree = "<group>"; };
+		21A5B8021DCB3195000F0281 /* cameras */ = {isa = PBXFileReference; lastKnownFileType = folder; path = cameras; sourceTree = "<group>"; };
+		21A5B8031DCB3195000F0281 /* outputs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = outputs; sourceTree = "<group>"; };
+		21A5B8041DCB3195000F0281 /* scenes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scenes; sourceTree = "<group>"; };
 		21F7340D1DC28AF2008CCD6B /* Scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
 		21FF01B61DC1354B0087570E /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,9 +82,9 @@
 		218998D71DBF65830007677E /* Assignment1 */ = {
 			isa = PBXGroup;
 			children = (
-				218999071DBF69AA0007677E /* scenes */,
-				218998FF1DBF69AA0007677E /* images */,
-				218998FB1DBF69AA0007677E /* cameras */,
+				21A5B8021DCB3195000F0281 /* cameras */,
+				21A5B8031DCB3195000F0281 /* outputs */,
+				21A5B8041DCB3195000F0281 /* scenes */,
 				218998FA1DBF69AA0007677E /* Camera.h */,
 				21FF01B61DC1354B0087570E /* Camera.cpp */,
 				218998FC1DBF69AA0007677E /* Color.h */,
