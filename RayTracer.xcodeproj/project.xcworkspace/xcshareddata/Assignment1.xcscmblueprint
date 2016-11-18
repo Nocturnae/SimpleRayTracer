@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "133FA6D3D372BC4E9E46C10E6335A654B09342A4",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "133FA6D3D372BC4E9E46C10E6335A654B09342A4" : 9223372036854775807,
+    "DAED886C0E4C2234086E8E99500B2000F8CAA29F" : 9223372036854775807
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "255B23CE-799E-4444-8B2A-1773108A0533",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "133FA6D3D372BC4E9E46C10E6335A654B09342A4" : "Assignment1\/",
+    "DAED886C0E4C2234086E8E99500B2000F8CAA29F" : "HolyReview\/"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Assignment1",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Assignment1.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Nocturnae\/SimpleRayTracer.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "133FA6D3D372BC4E9E46C10E6335A654B09342A4"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/Nocturnae\/HolyReview.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "DAED886C0E4C2234086E8E99500B2000F8CAA29F"
+    }
+  ]
+}

@@ -29,7 +29,7 @@
 
 /* Begin PBXFileReference section */
 		217BBF5D1DC6767B0062FA5F /* Material.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
-		218998D51DBF65830007677E /* Assignment1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Assignment1; sourceTree = BUILT_PRODUCTS_DIR; };
+		218998D51DBF65830007677E /* RayTracer */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = RayTracer; sourceTree = BUILT_PRODUCTS_DIR; };
 		218998FA1DBF69AA0007677E /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Camera.h; sourceTree = "<group>"; };
 		218998FC1DBF69AA0007677E /* Color.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Color.h; sourceTree = "<group>"; };
 		218998FD1DBF69AA0007677E /* Image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Image.cpp; sourceTree = "<group>"; };
@@ -66,6 +66,7 @@
 		218998CC1DBF65830007677E = {
 			isa = PBXGroup;
 			children = (
+				218F5D441DDF32620006B74E /* Assignment2 */,
 				218998D71DBF65830007677E /* Assignment1 */,
 				218998D61DBF65830007677E /* Products */,
 			);
@@ -74,7 +75,7 @@
 		218998D61DBF65830007677E /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				218998D51DBF65830007677E /* Assignment1 */,
+				218998D51DBF65830007677E /* RayTracer */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -107,12 +108,19 @@
 			path = Assignment1;
 			sourceTree = "<group>";
 		};
+		218F5D441DDF32620006B74E /* Assignment2 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Assignment2;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		218998D41DBF65830007677E /* Assignment1 */ = {
+		218998D41DBF65830007677E /* RayTracer */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 218998DC1DBF65830007677E /* Build configuration list for PBXNativeTarget "Assignment1" */;
+			buildConfigurationList = 218998DC1DBF65830007677E /* Build configuration list for PBXNativeTarget "RayTracer" */;
 			buildPhases = (
 				218998D11DBF65830007677E /* Sources */,
 				218998D21DBF65830007677E /* Frameworks */,
@@ -122,9 +130,9 @@
 			);
 			dependencies = (
 			);
-			name = Assignment1;
+			name = RayTracer;
 			productName = Assignment1;
-			productReference = 218998D51DBF65830007677E /* Assignment1 */;
+			productReference = 218998D51DBF65830007677E /* RayTracer */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -142,7 +150,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 218998D01DBF65830007677E /* Build configuration list for PBXProject "Assignment1" */;
+			buildConfigurationList = 218998D01DBF65830007677E /* Build configuration list for PBXProject "RayTracer" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -154,7 +162,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				218998D41DBF65830007677E /* Assignment1 */,
+				218998D41DBF65830007677E /* RayTracer */,
 			);
 		};
 /* End PBXProject section */
@@ -280,7 +288,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		218998D01DBF65830007677E /* Build configuration list for PBXProject "Assignment1" */ = {
+		218998D01DBF65830007677E /* Build configuration list for PBXProject "RayTracer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				218998DA1DBF65830007677E /* Debug */,
@@ -289,7 +297,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		218998DC1DBF65830007677E /* Build configuration list for PBXNativeTarget "Assignment1" */ = {
+		218998DC1DBF65830007677E /* Build configuration list for PBXNativeTarget "RayTracer" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				218998DD1DBF65830007677E /* Debug */,
