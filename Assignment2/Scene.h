@@ -32,7 +32,7 @@ class Scene {
 
     std::vector<PointLight> _lights;
     
-    std::vector<std::string> _textures;
+    std::vector<Texture> _textures;
     
     std::vector<Matrix> _translation;
     std::vector<Matrix> _scaling;
@@ -88,6 +88,10 @@ public:
     
     const Material& GetMaterial(MaterialId id) const {
         return _materials[id - 1];
+    }
+    
+    const Texture& GetTexture(TextureId id) const {
+        return _textures[id - 1];
     }
 
     friend std::istream& operator>>(std::istream& stream, Scene& scene);

@@ -34,12 +34,15 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
     // textures
     getline(stream, dummy);
     stream >> tmpCount;
-    scene._textures.resize(tmpCount);
     for (i = 0; i < tmpCount; i++) {
-        stream >> scene._textures[i] >> std::ws;
+        std::string filename;
+        stream >> filename;
+        scene._textures.push_back(Texture(filename.c_str())); // fix
+        // haven't tested
     }
     
     // translation
+    getline(stream, dummy);
     getline(stream, dummy);
     stream >> tmpCount;
     scene._translation.resize(tmpCount);

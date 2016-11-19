@@ -4,12 +4,15 @@ OBJ = $(SRC:.cpp=.o)
 	CFLAGS = -std=c++11 -O3
 
 .cpp.o:
-		g++ -c $< $(CFLAGS)
+	g++ -c $< $(CFLAGS)
 
 all: test
 
-test: $(OBJ)
-		g++ $(OBJ) -o raytracer $(CFLAGS)
+aoa_jpeg.o: jpeg_reader/aoa_jpeg.c
+			gcc -c $< -O3
 
-clean:
-		rm -f *.o raytracer *.ppm
+test: $(OBJ) aoa_jpeg.o
+			g++ $(OBJ) aoa_jpeg.o -o raytracer $(CPPFLAGS) -ljpeg
+
+clean: 
+	rm -f *.o raytracer *.ppm

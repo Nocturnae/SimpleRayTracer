@@ -93,15 +93,12 @@ Image Camera::Render() const
 
 		for (size_t j = 0; j < _imagePlane.Width; j++){
 			rayEquation.Direction((worldPosition - _position).Normalized());
-            
-            //output.Pixel(i, j) = Color(144, 23, 142);
 
 			if (_scene->FastRaycast(rayEquation, hitInfo, hitCache)){
                 
 				output.Pixel(i, j) =
 						_scene->GetMaterial(hitInfo.Material).Calculate(hitInfo.Normal, hitInfo.Position, - rayEquation.Direction(), _scene, _scene->ReflectionCount());
                 
-                //output.Pixel(i, j) = Color(144, 23, 142);
 			}
 			else
 			{

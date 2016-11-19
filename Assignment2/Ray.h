@@ -40,6 +40,7 @@ std::ostream& operator<<(std::ostream& out, const Ray& ray);
 struct RayHitInfo {
 
 	MaterialId Material;
+    TextureId Texture;
 	Vector3 Position;
 	Vector3 Normal;
 

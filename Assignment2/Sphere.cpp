@@ -41,31 +41,7 @@ bool Sphere::RayHit(const Ray& ray, RayHitInfo& hitInfo) const
 
 	hitInfo.Position = ray.Origin() + (root * ray.Direction());
 	hitInfo.Material = _material;
+    hitInfo.Texture = _texture;
 	hitInfo.Parameter = root;
     return true;
-}
-
-std::istream &operator>>(std::istream &stream, Sphere &sphere)
-{
-    stream >> sphere._material;
-    stream >> sphere._texture;
-    
-    int tCount;
-    char type;
-    stream >> tCount;
-    for (int i = 0; i < tCount; i++) {
-        // apply transformation here?
-        stream >> type;
-        if (type == 's') {
-        
-        }
-        else if (type == 't') {
-            
-        }
-        else if (type == 'r') {
-            
-        }
-    }
-    
-    return stream;
 }
