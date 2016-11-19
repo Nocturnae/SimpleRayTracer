@@ -11,6 +11,7 @@
 
 #include <stdio.h>
 #include "Vector3.h"
+#include "Vertex.h"
 #include "Color.h"
 extern "C" {
 #include "jpeg_reader/aoa_jpeg.h"
@@ -29,10 +30,11 @@ public:
             _image[i] = new UCOLOR[_width];
         }
         
-        read_jpeg(file, _image, &_width, &_height);*/
+        read_jpeg(file, _image, &_width, &_height);
+         */
     }
     
-    Color Interpolate(Vector3 point) const;
+    Color Interpolate(Vector3 point, Vertex center, float radius) const;
 };
 
 typedef size_t TextureId;

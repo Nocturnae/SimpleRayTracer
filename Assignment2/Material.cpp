@@ -20,7 +20,7 @@ Color Material::Calculate(const Vector3 &normal, const Vector3 &pointOfIntersect
                           const Scene *scene, int hitCount) const
 {
     
-   // Color pointTexture = scene->GetTexture(textureID).Interpolate(pointOfIntersection); //?
+    //Color color = hitInfo.Color;
     
     float _channels[3] =
             {
@@ -63,13 +63,14 @@ Color Material::Calculate(const Vector3 &normal, const Vector3 &pointOfIntersect
         _channels[1] += intensity.G() * (_diffuse.G() * diffuseCoefficient + _specular.G() * specularCoefficient);
 
         _channels[2] += intensity.B() * (_diffuse.B() * diffuseCoefficient + _specular.B() * specularCoefficient);
- 
         /*
-        _channels[0] += intensity.R() * (pointTexture.R() * diffuseCoefficient + _specular.R() * specularCoefficient);
+        _channels[0] += color.R() * (_diffuse.R() * diffuseCoefficient + _specular.R() * specularCoefficient);
         
-        _channels[1] += intensity.G() * (pointTexture.G() * diffuseCoefficient + _specular.G() * specularCoefficient);
+        _channels[1] += color.G() * (_diffuse.G() * diffuseCoefficient + _specular.G() * specularCoefficient);
         
-        _channels[2] += intensity.B() * (pointTexture.B() * diffuseCoefficient + _specular.B() * specularCoefficient);*/
+        _channels[2] += color.B() * (_diffuse.B() * diffuseCoefficient + _specular.B() * specularCoefficient);
+
+         */
     }
 
     return Color(_channels[0], _channels[1], _channels[2]);
@@ -78,7 +79,7 @@ Color Material::Calculate(const Vector3 &normal, const Vector3 &pointOfIntersect
 void Material::CalculateReflectance(Color &reflectedColor, const Vector3 &normal, const Vector3 &rayDirection,
                                     const Vector3 &pointOfIntersection, const Scene *scene, int hitCount) const
 {
-    /*
+    
     float cosAlpha = Vector3::Dot(rayDirection, normal);
     Vector3 reflectedRayDirection = (2 * cosAlpha * normal - rayDirection).Normalized();
     Ray reflectedRay(pointOfIntersection + normal * 0.0001, reflectedRayDirection);
@@ -87,8 +88,8 @@ void Material::CalculateReflectance(Color &reflectedColor, const Vector3 &normal
     if (scene->FastRaycast(reflectedRay, hitInfo)) {
         reflectedColor =
                 scene->GetMaterial(hitInfo.Material).Calculate(hitInfo.Normal, hitInfo.Position,
-                                                               -reflectedRay.Direction(), scene, hitCount - 1, hitInfo.Texture);
-    }*/
+                                                               -reflectedRay.Direction(), scene, hitCount - 1);
+    }
 }
 
 std::istream &operator>>(std::istream &stream, Material &mat)
