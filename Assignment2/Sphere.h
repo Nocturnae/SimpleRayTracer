@@ -8,6 +8,7 @@
 
 #include "Vertex.h"
 #include "Material.h"
+#include "Texture.h"
 #include "Ray.h"
 
 class Scene;
@@ -18,12 +19,15 @@ class Sphere {
     VertexId    _center;
 
     MaterialId  _material;
+    
+    TextureId _texture;
 
     float       _radius;
 
 public:
     Sphere() = default;
-    explicit Sphere(VertexId center, float radius, MaterialId material);
+    //Sphere() : _center(0), _radius(1.0) {};
+    explicit Sphere(VertexId center, float radius, MaterialId material, TextureId texture);
 
     void SetScene(const Scene* scene);
 

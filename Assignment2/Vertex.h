@@ -20,6 +20,8 @@ public:
     }
 
     friend std::istream& operator>>(std::istream& stream, Vertex& vertex);
+    
+    bool operator==(const Vertex &vertex) const;
 };
 
 typedef size_t VertexId;

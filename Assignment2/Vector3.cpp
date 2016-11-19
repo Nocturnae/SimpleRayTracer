@@ -15,6 +15,29 @@ Vector3::Vector3(float x, float y, float z) {
     W(0);
 }
 
+Vector3::Vector3(float x, float y, float z, float w) {
+    X(x);
+    Y(y);
+    Z(z);
+    W(w);
+}
+
+Vector3::Vector3(const Vector3& rhs) {
+    _components[0] = rhs._components[0];
+    _components[1] = rhs._components[1];
+    _components[2] = rhs._components[2];
+    _components[3] = rhs._components[3];
+}
+
+void Vector3::operator=(const Vector3& rhs) {
+    if (this != &rhs) {
+        _components[0] = rhs._components[0];
+        _components[1] = rhs._components[1];
+        _components[2] = rhs._components[2];
+        _components[3] = rhs._components[3];
+    }
+}
+
 float Vector3::X() const {
     return _components[0];
 }
@@ -125,13 +148,15 @@ Vector3 &Vector3::operator-=(const Vector3 &vector) {
 bool Vector3::operator==(const Vector3 &vector) const {
     return  _components[0] == vector._components[0] &&
             _components[1] == vector._components[1] &&
-            _components[2] == vector._components[2];
+            _components[2] == vector._components[2] &&
+            _components[3] == vector._components[3];
 }
 
 bool Vector3::operator!=(const Vector3 &vector) const {
     return  _components[0] != vector._components[0] ||
             _components[1] != vector._components[1] ||
-            _components[2] != vector._components[2];
+            _components[2] != vector._components[2] ||
+            _components[3] != vector._components[3];
 }
 
 float &Vector3::operator[](int index) {
@@ -146,7 +171,8 @@ float Vector3::Dot(const Vector3 &v1, const Vector3 &v2) {
     return
             v1.X() * v2.X() +
             v1.Y() * v2.Y() +
-            v1.Z() * v2.Z();
+            v1.Z() * v2.Z() +
+            v1.W() * v2.W();
 }
 
 Vector3 Vector3::Cross(const Vector3 &v1, const Vector3 &v2) {

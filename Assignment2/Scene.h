@@ -14,6 +14,7 @@
 #include "PointLight.h"
 #include "Octree.h"
 #include "Texture.h"
+#include "Matrix.h"
 #include <string>
 #include <limits>
 
@@ -32,9 +33,10 @@ class Scene {
     std::vector<PointLight> _lights;
     
     std::vector<std::string> _textures;
-    std::vector<Vector3> _translation;
-    std::vector<Vector3> _scaling;
-    std::vector<Vector3> _rotation;
+    
+    std::vector<Matrix> _translation;
+    std::vector<Matrix> _scaling;
+    std::vector<Matrix> _rotation;
 
     int _rayReflect;
     Color _background;

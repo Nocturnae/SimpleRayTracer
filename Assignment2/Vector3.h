@@ -11,11 +11,14 @@ class Vector3 {
 
     float _components[4];
 
-    //void W(float w);
+    void W(float w);
     float W() const;
 public:
     Vector3();
     Vector3(float x, float y, float z);
+    Vector3(float x, float y, float z, float w);
+    
+    Vector3(const Vector3& rhs);
     
     float X() const;
     float Y() const;
@@ -25,13 +28,13 @@ public:
     void Y(float y);
     void Z(float z);
     
-    void W(float w);
-
     float SquaredMagnitude() const;
     float Magnitude() const;
 
     Vector3 Normalized() const;
     void Normalize();
+    
+    void operator=(const Vector3& rhs);
 
     // Scalar operators
     Vector3 operator*(float scalar) const;

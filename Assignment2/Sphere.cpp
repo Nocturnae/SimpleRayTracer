@@ -6,11 +6,12 @@
 #include "Scene.h"
 #include <cmath>
 
-Sphere::Sphere(VertexId center, float radius, MaterialId material)
+Sphere::Sphere(VertexId center, float radius, MaterialId material, TextureId texture)
 {
     _center = center;
     _radius = radius;
     _material = material;
+    _texture = texture;
 }
 
 Vector3 Sphere::Normal(const Vector3 &at) const
@@ -47,8 +48,24 @@ bool Sphere::RayHit(const Ray& ray, RayHitInfo& hitInfo) const
 std::istream &operator>>(std::istream &stream, Sphere &sphere)
 {
     stream >> sphere._material;
-    stream >> sphere._radius;
-    stream >> sphere._center;
-
+    stream >> sphere._texture;
+    
+    int tCount;
+    char type;
+    stream >> tCount;
+    for (int i = 0; i < tCount; i++) {
+        // apply transformation here?
+        stream >> type;
+        if (type == 's') {
+        
+        }
+        else if (type == 't') {
+            
+        }
+        else if (type == 'r') {
+            
+        }
+    }
+    
     return stream;
 }

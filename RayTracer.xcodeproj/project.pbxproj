@@ -23,6 +23,7 @@
 		218F5DF81DDF36440006B74E /* Vector3.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 218F5DE71DDF36440006B74E /* Vector3.cpp */; };
 		218F5DF91DDF36440006B74E /* Vertex.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 218F5DE91DDF36440006B74E /* Vertex.cpp */; };
 		218F5DFE1DDFAF0A0006B74E /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 218F5DFC1DDFAF090006B74E /* Texture.cpp */; };
+		218F5E011DDFC2EB0006B74E /* Matrix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 218F5DFF1DDFC2EB0006B74E /* Matrix.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -87,6 +88,8 @@
 		218F5DEA1DDF36440006B74E /* Vertex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Vertex.h; path = Assignment2/Vertex.h; sourceTree = "<group>"; };
 		218F5DFC1DDFAF090006B74E /* Texture.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Texture.cpp; path = Assignment2/Texture.cpp; sourceTree = "<group>"; };
 		218F5DFD1DDFAF090006B74E /* Texture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Texture.h; path = Assignment2/Texture.h; sourceTree = "<group>"; };
+		218F5DFF1DDFC2EB0006B74E /* Matrix.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Matrix.cpp; path = Assignment2/Matrix.cpp; sourceTree = "<group>"; };
+		218F5E001DDFC2EB0006B74E /* Matrix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Matrix.h; path = Assignment2/Matrix.h; sourceTree = "<group>"; };
 		21A5B8021DCB3195000F0281 /* cameras */ = {isa = PBXFileReference; lastKnownFileType = folder; path = cameras; sourceTree = "<group>"; };
 		21A5B8031DCB3195000F0281 /* outputs */ = {isa = PBXFileReference; lastKnownFileType = folder; path = outputs; sourceTree = "<group>"; };
 		21A5B8041DCB3195000F0281 /* scenes */ = {isa = PBXFileReference; lastKnownFileType = folder; path = scenes; sourceTree = "<group>"; };
@@ -185,6 +188,8 @@
 				218F5DEA1DDF36440006B74E /* Vertex.h */,
 				218F5DFC1DDFAF090006B74E /* Texture.cpp */,
 				218F5DFD1DDFAF090006B74E /* Texture.h */,
+				218F5DFF1DDFC2EB0006B74E /* Matrix.cpp */,
+				218F5E001DDFC2EB0006B74E /* Matrix.h */,
 			);
 			name = Assignment2;
 			sourceTree = "<group>";
@@ -259,6 +264,7 @@
 				218F5DF21DDF36440006B74E /* Octree.cpp in Sources */,
 				218F5DF31DDF36440006B74E /* PointLight.cpp in Sources */,
 				218F5DEE1DDF36440006B74E /* main.cpp in Sources */,
+				218F5E011DDFC2EB0006B74E /* Matrix.cpp in Sources */,
 				218F5DFE1DDFAF0A0006B74E /* Texture.cpp in Sources */,
 				218F5DF61DDF36440006B74E /* Sphere.cpp in Sources */,
 				218F5DEC1DDF36440006B74E /* Color.cpp in Sources */,

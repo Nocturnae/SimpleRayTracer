@@ -43,44 +43,62 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
     getline(stream, dummy);
     stream >> tmpCount;
     scene._translation.resize(tmpCount);
-    // TODO: where to realy store new data
     for (i = 0; i < tmpCount; i++) {
-        stream >> scene._translation[i] >> std::ws;
+        float t_x, t_y, t_z;
+        stream >> t_x >> t_y >> t_z;
+        Vector3 r1(1, 0, 0, t_x), r2(0, 1, 0, t_y), r3(0, 0, 1, t_z), r4(0, 0, 0, 1);
+        (scene._translation[i])[0] = r1;
+        (scene._translation[i])[1] = r2;
+        (scene._translation[i])[2] = r3;
+        (scene._translation[i])[3] = r4;
     }
     
     // scaling
     getline(stream, dummy);
+    getline(stream, dummy);
     stream >> tmpCount;
     scene._scaling.resize(tmpCount);
-    // TODO: where to realy store new data
     for (i = 0; i < tmpCount; i++) {
-        stream >> scene._scaling[i] >> std::ws;
+        float s_x, s_y, s_z;
+        stream >> s_x >> s_y >> s_z;
+        Vector3 r1(s_x, 0, 0, 0), r2(0, s_y, 0, 0), r3(0, 0, s_z, 0), r4(0, 0, 0, 1);
+        (scene._scaling[i])[0] = r1;
+        (scene._scaling[i])[1] = r2;
+        (scene._scaling[i])[2] = r3;
+        (scene._scaling[i])[3] = r4;
     }
     
     // rotation
     getline(stream, dummy);
+    getline(stream, dummy);
     stream >> tmpCount;
     scene._rotation.resize(tmpCount);
-    // TODO: where to realy store new data
-    // hmmm!! rotation not vec3
     for (i = 0; i < tmpCount; i++) {
-        stream >> scene._rotation[i] >> std::ws;
-        float w_value;
-        stream >> w_value;
-        scene._rotation[i].W(w_value);
+        float alpha;
+        int u_x, u_y, u_z;
+        stream >> alpha >> u_x >> u_y >> u_z;
+        
+        Vector3 rot_axis(u_x, u_y, u_z);
+        // normalize?
+        
+        float length = rot_axis.Magnitude();
+        
+        Matrix t_inv(Vector3(1, 0, 0, -u_x), Vector3(0, 1, 0, -u_y), Vector3(0, 0, 1, -u_z), Vector3(0, 0, 0, 1));
+        Matrix r_x(Vector3(1, 0, 0, 0),
+                   Vector3(0, u_z / length, -u_y / length, 0),
+                   Vector3(0, u_y / length, u_z / length, 0),
+                   Vector3(0, 0, 0, 1));
+        
+        
+        Matrix r_z(Vector3(cos(alpha), -sin(alpha), 0, 0),
+                   Vector3(sin(alpha), cos(alpha), 0, 0),
+                   Vector3(0, 0, 1, 0),
+                   Vector3(0, 0, 0 ,1));
+        
+        
     }
     
-    float maxDist = sqrtf(2);
-    size_t depth = 2;
-    scene._vertices.push_back(Vertex(Vector3::Zero));
-    scene._vertices.push_back(Vertex(Vector3(0, 0, 1)));
-    scene._vertices.push_back(Vertex(Vector3(0, 1, 0)));
-    scene._vertices.push_back(Vertex(Vector3(1, 0, 0)));
-    scene._vertices.push_back(Vertex(Vector3(0, 1, 1)));
-    scene._vertices.push_back(Vertex(Vector3(1, 0, 1)));
-    scene._vertices.push_back(Vertex(Vector3(1, 1, 0)));
-    scene._vertices.push_back(Vertex(Vector3(1, 1, 1)));
-    
+    getline(stream, dummy);
     stream >> tmpCount;
     std::string type;
     
@@ -95,23 +113,51 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
             scene._meshes.push_back(tmp);
         }
         else {
-            // don't have the correct attributes :/?
+            Vector3 s_center(0, 0, 0, 1);
+            float radius = 1.0;
+            
             MaterialId mid;
             TextureId tid;
             stream >> mid >> tid;
-            Sphere tmp(0, 1.0, ;
-            stream >> tmp >> std::ws;
+            
+            int t_count, t_id;
+            char t_type;
+            stream >> t_count;
+            
+            for (int j = 0; j < t_count; j++) {
+                stream >> t_type >> t_id;
+                if (t_type == 's') {
+                    radius *= scene._scaling[t_id - 1][0][0];
+                }
+                else if (t_type == 't') {
+                    s_center = scene._translation[t_id - 1] * s_center;
+                }
+            }
+            
+            Vertex centerVertex(s_center);
+            
+            VertexId vid;
+
+            
+            // check if already exits
+            std::vector<Vertex>::iterator it = find(scene._vertices.begin(), scene._vertices.end(), centerVertex);
+            if (it == scene._vertices.end()) {
+                vid = scene._vertices.size();
+                scene._vertices.push_back(centerVertex);
+            }
+            else {
+                vid = it - scene._vertices.begin();
+            }
+            
+            Sphere tmp(vid, radius, mid, tid);
             tmp.SetScene(&scene);
             scene._spheres.push_back(tmp);
         }
     }
-/*
-	stream >> tmpCount >> std::ws;
-	getline(stream, dummy);
-	scene._vertices.resize(tmpCount);
-	float maxDist = 0;
-	for (i = 0; i < tmpCount; ++i) {
-		stream >> scene._vertices[i] >> std::ws;
+    
+    float maxDist = sqrtf(2);
+    size_t depth = 2;
+	for (i = 0; i < scene._vertices.size(); ++i) {
 		maxDist = std::max(
 				{
 						maxDist,
@@ -121,7 +167,6 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
 				});
 	  }
  
-	size_t depth = 0;
 	maxDist = std::abs(maxDist);
 	if (maxDist > 4) {
 		depth = static_cast<size_t>(std::ceil(std::log2(maxDist)));
@@ -130,7 +175,7 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
 	else
 	{
 		depth = 2;
-	}*/
+	}
 
 	scene._root = Octree(Vector3(-maxDist, -maxDist, -maxDist), maxDist * 2);
 	scene._root.Partition(depth);
@@ -168,7 +213,7 @@ void Scene::AddCameras(std::istream &stream)
 
 Scene Scene::GetMockScene()
 {
-	Scene scene;
+	Scene scene;/*
 	scene._vertices.push_back(Vertex(Vector3(0, 0, 0)));
 	scene._vertices.push_back(Vertex(Vector3(3, 0, 0)));
 	scene._vertices.push_back(Vertex(Vector3(-3, 0, 0)));
@@ -196,7 +241,7 @@ Scene Scene::GetMockScene()
 	scene._cameras.push_back(Camera(Vector3(0, 0, -5), Vector3(0, 1, 0), Vector3(0, 0, 1), -5, 5, -5, 5, 1, 256, 256));
 	scene._cameras[0].SetScene(&scene);
 	
-	scene._background = Color(128, 0, 96);
+	scene._background = Color(128, 0, 96);*/
 
 	return scene;
 }
