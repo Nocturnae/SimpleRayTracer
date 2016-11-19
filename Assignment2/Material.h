@@ -22,7 +22,7 @@ public:
 
 	static Material Diffuse(const Color& color);
 
-    Color Calculate(const Vector3& normal, const Vector3 &pointOfIntersection, const Vector3& viewDirection, const Scene* scene, int hitCount) const;
+    Color Calculate(const Vector3& normal, const Vector3 &pointOfIntersection, const Vector3& viewDirection, const Scene* scene, int hitCount, Color color) const;
     void CalculateReflectance(Color &reflectedColor, const Vector3& normal, const Vector3 &rayDirection, const Vector3 &pointOfIntersection, const Scene* scene, int hitCount) const;
 
     friend std::istream& operator>>(std::istream& stream, Material& mat);

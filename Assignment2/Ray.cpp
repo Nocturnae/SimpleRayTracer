@@ -4,8 +4,7 @@
 
 #include "Ray.h"
 
-Ray::Ray(const Vector3 &origin, const Vector3 &direction)
-    : _origin(origin), _direction(direction)
+Ray::Ray(const Vector3 &origin, const Vector3 &direction) : _origin(origin), _direction(direction)
 {
 }
 

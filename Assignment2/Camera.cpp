@@ -6,8 +6,7 @@
 #include "Scene.h"
 #include <unistd.h>
 
-Camera::Camera(const Vector3 &position, const Vector3 &up, const Vector3 &gaze, float left, float right, float bottom,
-               float top, float dist, size_t horRes, size_t verRes)
+Camera::Camera(const Vector3 &position, const Vector3 &up, const Vector3 &gaze, float left, float right, float bottom, float top, float dist, size_t horRes, size_t verRes)
 {
     _position = position;
     _space.Up = up;
@@ -88,7 +87,7 @@ Image Camera::Render() const
 
 	Ray rayEquation(_position, Vector3::Zero);
 
-	for (size_t i = 0; i < _imagePlane.Height; i ++){
+	for (size_t i = 0; i < _imagePlane.Height; i++){
 		worldPosition = rowBegin + (i * _renderInfo.OneDown);
 
 		for (size_t j = 0; j < _imagePlane.Width; j++){
@@ -97,7 +96,7 @@ Image Camera::Render() const
 			if (_scene->FastRaycast(rayEquation, hitInfo, hitCache)){
                 
 				output.Pixel(i, j) =
-						_scene->GetMaterial(hitInfo.Material).Calculate(hitInfo.Normal, hitInfo.Position, - rayEquation.Direction(), _scene, _scene->ReflectionCount());
+						_scene->GetMaterial(hitInfo.Material).Calculate(hitInfo.Normal, hitInfo.Position, - rayEquation.Direction(), _scene, _scene->ReflectionCount(), hitInfo.Color);
                 
 			}
 			else

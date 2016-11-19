@@ -37,8 +37,7 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
     for (i = 0; i < tmpCount; i++) {
         std::string filename;
         stream >> filename;
-        scene._textures.push_back(Texture(filename.c_str())); // fix
-        // haven't tested
+        scene._textures.push_back(Texture(filename.c_str()));
     }
     
     // translation
@@ -141,7 +140,6 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
             
             VertexId vid;
 
-            
             // check if already exits
             std::vector<Vertex>::iterator it = find(scene._vertices.begin(), scene._vertices.end(), centerVertex);
             if (it == scene._vertices.end()) {
@@ -158,8 +156,7 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
         }
     }
     
-    float maxDist = sqrtf(2);
-    size_t depth = 2;
+    float maxDist = 0;
 	for (i = 0; i < scene._vertices.size(); ++i) {
 		maxDist = std::max(
 				{
@@ -170,6 +167,7 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
 				});
 	  }
  
+    size_t depth = 2;
 	maxDist = std::abs(maxDist);
 	if (maxDist > 4) {
 		depth = static_cast<size_t>(std::ceil(std::log2(maxDist)));

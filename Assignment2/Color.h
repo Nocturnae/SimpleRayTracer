@@ -13,6 +13,8 @@ class Color {
 public:
     Color();
     Color(float r, float g, float b);
+    
+    Color(const Color& rhs);
 
     inline float R() const
     {

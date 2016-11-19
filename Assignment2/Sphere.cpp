@@ -40,13 +40,13 @@ bool Sphere::RayHit(const Ray& ray, RayHitInfo& hitInfo) const
 	float root = (-B - std::sqrt(Delta)) / 2;
 
 	hitInfo.Position = ray.Origin() + (root * ray.Direction());
-    /*
+    
     if (_texture != 0) {
         hitInfo.Color = _scene->GetTexture(_texture).Interpolate(hitInfo.Position, _scene->GetVertex(_center), _radius);
     }
     else {
         hitInfo.Color = Color(-1, -1, -1);
-    }*/
+    }
     
     hitInfo.Material = _material;
     hitInfo.Parameter = root;
