@@ -95,7 +95,8 @@ Image Camera::Render() const
 			rayEquation.Direction((worldPosition - _position).Normalized());
 
 			if (_scene->FastRaycast(rayEquation, hitInfo, hitCache)){
-                Color* textureColor = _scene->GetTexture(hitInfo.Texture).Interpolate(hitInfo.Position, hitInfo.Center, hitInfo.Radius);
+                //Color* textureColor = _scene->GetTexture(hitInfo.Texture).Interpolate(hitInfo.Position, hitInfo.Center, hitInfo.Radius);
+                Color* textureColor = NULL;
                 
 				output.Pixel(i, j) =
 						_scene->GetMaterial(hitInfo.Material).Calculate(hitInfo.Normal, hitInfo.Position, - rayEquation.Direction(), _scene, _scene->ReflectionCount(), textureColor);

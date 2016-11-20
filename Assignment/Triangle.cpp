@@ -6,13 +6,14 @@
 #include "Triangle.h"
 #include "Scene.h"
 
-Triangle::Triangle(const VertexId (&vertices)[3], MaterialId materialId)
+Triangle::Triangle(const VertexId (&vertices)[3], MaterialId materialId, TextureId textureId)
 {
     _vertices[0] = vertices[0];
     _vertices[1] = vertices[1];
     _vertices[2] = vertices[2];
 
     _materialId = materialId;
+    _textureId = textureId;
 }
 
 void Triangle::SetScene(const Scene *scene)
@@ -88,6 +89,7 @@ bool Triangle::RayHit(const Ray& ray, float t, RayHitInfo& hitInfo) const
     hitInfo.Parameter = t;
     hitInfo.Position = pointOfIntersection;
     hitInfo.Material = _materialId;
+    hitInfo.Texture = _textureId;
 
     return true;
 }

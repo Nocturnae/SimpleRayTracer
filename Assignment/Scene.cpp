@@ -104,34 +104,82 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
     getline(stream, dummy);
 	stream >> tmpCount;
 	std::string type;
+    
+    MaterialId mid; TextureId tid; int t_count;
+    char t_type; int t_id;
 
 	for (i = 0; i < tmpCount; ++i) {
-    //for (i = 0; i < 1; ++i) {
 		stream >> type;
 		getline(stream, dummy);
 
 		if (type == "#CubeInstance") {
-            // TODO
-			Mesh tmp;
-			stream >> tmp >> std::ws;
-			tmp.SetScene(&scene);
-			scene._meshes.push_back(tmp);
+            /*
+            std::vector<Vector3> vertexList = {Vector3(0.5f, 0.5f, 0.5f), Vector3(0.5f, 0.5f, -0.5f),
+                                                Vector3(0.5f, -0.5f, 0.5f), Vector3(0.5f, -0.5f, -0.5f),
+                                                Vector3(-0.5f, 0.5f, 0.5f), Vector3(-0.5f, 0.5f, -0.5f),
+                                                Vector3(-0.5f, -0.5f, 0.5f), Vector3(-0.5f, -0.5f, -0.5f)};*/
+            
+            std::vector<Vector3> vertexList = {Vector3(0.5f, 0.5f, 0.5f), Vector3(0.5f, 0.5f, -0.5f),
+                Vector3(-0.5f, 0.5f, -0.5f), Vector3(-0.5f, 0.5f, 0.5f),
+                Vector3(0.5f, -0.5f, 0.5f), Vector3(0.5f, -0.5f, -0.5f),
+                Vector3(-0.5f, -0.5f, -0.5f), Vector3(-0.5f, -0.5f, 0.5f)};
+            
+            
+            stream >> mid >> tid >> t_count;
+            
+            for (int j = 0; j < t_count; j++) {
+                stream >> t_type >> t_id;
+                if (t_type == 's') {
+                    for (int k = 0; k < vertexList.size(); k++) {
+                        vertexList[k] = scene._scaling[t_id - 1] * vertexList[k];
+                    }
+                }
+                else if (t_type == 't') {
+                    for (int k = 0; k < vertexList.size(); k++) {
+                        vertexList[k] = scene._translation[t_id - 1] * vertexList[k];
+                    }
+                }
+            }
+            
+            /*
+            std::vector<VertexId> vidList;
+            for (int k = 0; k < vertexList.size(); k++) {
+                Vertex vertex(vertexList[k]);
+                VertexId vid;
+                std::vector<Vertex>::iterator it = find(scene._vertices.begin(), scene._vertices.end(), vertex);
+                if (it == scene._vertices.end()) {
+                    // TODO: check
+                    vid = scene._vertices.size() + 1;
+                    scene._vertices.push_back(vertex);
+                }
+                else {
+                    // TODO: check
+                    vid = it - scene._vertices.begin();
+                }
+                
+                vidList.push_back(vid);
+            }           */
+            
+            std::vector<VertexId> vidList;
+            for (int k = 0; k < vertexList.size(); k++) {
+                Vertex vertex(vertexList[k]);
+                VertexId vid = scene._vertices.size() + 1;
+                scene._vertices.push_back(vertex);
+                vidList.push_back(vid);
+            }
+            
+            Mesh temp(mid, tid, vidList);
+            temp.SetScene(&scene);
+            scene._meshes.push_back(temp);
+            
 		}
 		else {
-            /*
-			Sphere tmp;
-			stream >> tmp >> std::ws;
-			tmp.SetScene(&scene);
-			scene._spheres.push_back(tmp);*/
-            
-            MaterialId mid; TextureId tid; int t_count;
             
             Vector3 s_center;
             float radius = 1.0f;
             
             stream >> mid >> tid >> t_count;
             
-            char t_type; int t_id;
             for (int j = 0; j < t_count; j++) {
                 stream >> t_type >> t_id;
                 if (t_type == 's') {

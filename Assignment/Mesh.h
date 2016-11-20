@@ -9,6 +9,7 @@
 #include <iosfwd>
 #include <vector>
 #include "Material.h"
+#include "Texture.h"
 #include "Vertex.h"
 #include "Triangle.h"
 
@@ -17,19 +18,21 @@ class Mesh {
 
     size_t _triCount;
     MaterialId _materialId;
+    TextureId _textureId;
     std::vector<Triangle> _tris;
 
 public:
 
     Mesh() = default;
-    Mesh(size_t triCount, MaterialId matId, std::vector<Triangle> tris);
+    //Mesh(size_t triCount, MaterialId matId, std::vector<Triangle> tris);
+    Mesh(MaterialId matId, TextureId texId, std::vector<VertexId> vid);
 
 	const std::vector<Triangle>& GetTris() const
 	{
 		return _tris;
 	}
 
-    friend std::istream& operator>>(std::istream& stream, Mesh& mesh);
+    //friend std::istream& operator>>(std::istream& stream, Mesh& mesh);
 
     void SetScene(const Scene* scene);
 };

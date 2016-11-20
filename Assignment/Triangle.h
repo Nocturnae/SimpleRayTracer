@@ -8,6 +8,7 @@
 #include "Vertex.h"
 #include "Ray.h"
 #include "Material.h"
+#include "Texture.h"
 
 class Scene;
 
@@ -18,6 +19,7 @@ class Triangle
     VertexId    _vertices[3];
 
     MaterialId  _materialId;
+    TextureId _textureId;
 
     Vector3     _normal;
     Vector3     _unitNormal;
@@ -26,7 +28,7 @@ class Triangle
 
 public:
 
-    explicit Triangle(const VertexId (&vertices)[3], MaterialId materialId);
+    explicit Triangle(const VertexId (&vertices)[3], MaterialId materialId, TextureId textureId);
 
     void SetScene(const Scene* scene);
 

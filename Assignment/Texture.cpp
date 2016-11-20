@@ -11,15 +11,21 @@
 
 Color* Texture::Interpolate(Vector3 pointOfIntersection, Vertex center, float radius) const {
     // TODO: fix distorted image
+    /*float theta = acosf((pointOfIntersection[1] - center.Position()[1]) / radius);*/
+    float phi = atanf((pointOfIntersection[2] - center.Position()[2]) / (pointOfIntersection[0] - center.Position()[0]));
     float theta = acosf((pointOfIntersection[1] - center.Position()[1]) / radius);
-    float phi = atanf((pointOfIntersection[2] - center.Position()[2]) / pointOfIntersection[0]);
     //float phi = atan2f(pointOfIntersection[2] - center.Position()[2], pointOfIntersection[0] - center.Position()[0]);
+    /*
+    if (phi < 0) {
+        phi += 2 * M_PI;
+    }*/
     
     float u = phi / (2 * M_PI), v = (M_PI - theta) / M_PI;
     
     int i = std::max(0, (int)std::round(u * _width)), j = std::max(0, (int)std::round(v * _height));
+    //int i = std::round(u * _width), j = std::round(v * _height);
     
-    //std::cout << i << " " << j << std::endl;
+    //std::cout << pointOfIntersection << " " << theta << " " << phi << " " << i << " " << j << " " << u << " " << v << std::endl;
     
     Color* res = new Color(_image[i][j][0], _image[i][j][1], _image[i][j][2]);
     return res;
