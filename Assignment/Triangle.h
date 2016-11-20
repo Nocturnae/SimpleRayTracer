@@ -12,9 +12,13 @@
 
 class Scene;
 
+typedef size_t TriangleId;
+
 class Triangle
 {
     const Scene * _scene;
+    
+    TriangleId _triangleId;
 
     VertexId    _vertices[3];
 
@@ -28,7 +32,7 @@ class Triangle
 
 public:
 
-    explicit Triangle(const VertexId (&vertices)[3], MaterialId materialId, TextureId textureId);
+    explicit Triangle(TriangleId triangleId, const VertexId (&vertices)[3], MaterialId materialId, TextureId textureId);
 
     void SetScene(const Scene* scene);
 
@@ -45,6 +49,8 @@ public:
     {
         return _unitNormal;
     }
+    
+    Vector3* GetTextureTriangle() const;
 
 };
 

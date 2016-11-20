@@ -141,7 +141,6 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
                 }
             }
             
-            /*
             std::vector<VertexId> vidList;
             for (int k = 0; k < vertexList.size(); k++) {
                 Vertex vertex(vertexList[k]);
@@ -158,15 +157,16 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
                 }
                 
                 vidList.push_back(vid);
-            }           */
+            }
             
+            /*
             std::vector<VertexId> vidList;
             for (int k = 0; k < vertexList.size(); k++) {
                 Vertex vertex(vertexList[k]);
                 VertexId vid = scene._vertices.size() + 1;
                 scene._vertices.push_back(vertex);
                 vidList.push_back(vid);
-            }
+            }*/
             
             Mesh temp(mid, tid, vidList);
             temp.SetScene(&scene);

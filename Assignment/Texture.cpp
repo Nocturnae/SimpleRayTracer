@@ -9,7 +9,7 @@
 #include "Texture.h"
 #include <cmath>
 
-Color* Texture::Interpolate(Vector3 pointOfIntersection, Vertex center, float radius) const {
+Color* Texture::InterpolateSphere(Vector3 pointOfIntersection, Vertex center, float radius) const {
     // TODO: fix distorted image
     /*float theta = acosf((pointOfIntersection[1] - center.Position()[1]) / radius);*/
     float phi = atanf((pointOfIntersection[2] - center.Position()[2]) / (pointOfIntersection[0] - center.Position()[0]));
@@ -28,5 +28,18 @@ Color* Texture::Interpolate(Vector3 pointOfIntersection, Vertex center, float ra
     //std::cout << pointOfIntersection << " " << theta << " " << phi << " " << i << " " << j << " " << u << " " << v << std::endl;
     
     Color* res = new Color(_image[i][j][0], _image[i][j][1], _image[i][j][2]);
+    return res;
+}
+
+Color* Texture::InterpolateTriangle(Vector3 textureTriangle[3], float beta, float gamma) const {
+
+    float u = textureTriangle[0][0] + (beta * (textureTriangle[1][0] - textureTriangle[0][0])) + (gamma * (textureTriangle[2][0] - textureTriangle[0][0]));
+    float v = textureTriangle[0][1] + (beta * (textureTriangle[1][1] - textureTriangle[0][1])) + (gamma * (textureTriangle[2][1] - textureTriangle[0][1]));
+    
+    //int i = std::round(u * _width), j = std::round(v * _height);
+    int i = std::round(u * _width), j = std::round(v * _height);
+    
+    Color* res = new Color(_image[i][j][0], _image[i][j][1], _image[i][j][2]);
+    //Color* res = new Color(3, 28, 212);
     return res;
 }

@@ -22,7 +22,7 @@ class Texture {
 public:
     Texture() : _width(0), _height(0) {};
     Texture(const char* file) {
-        /*
+        
          read_jpeg_header(file, &_width, &_height);
          
          _image = new UCOLOR*[_height];
@@ -31,10 +31,11 @@ public:
          }
          
          read_jpeg(file, _image, &_width, &_height);
-        */
+        
     }
     
-    Color* Interpolate(Vector3 point, Vertex center, float radius) const;
+    Color* InterpolateSphere(Vector3 point, Vertex center, float radius) const;
+    Color* InterpolateTriangle(Vector3 textureTriangle[3], float beta, float gamma) const;
 };
 
 typedef size_t TextureId;

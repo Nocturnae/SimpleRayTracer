@@ -6,12 +6,13 @@
 #include "Triangle.h"
 #include "Scene.h"
 
-Triangle::Triangle(const VertexId (&vertices)[3], MaterialId materialId, TextureId textureId)
+Triangle::Triangle(TriangleId triangleId, const VertexId (&vertices)[3], MaterialId materialId, TextureId textureId)
 {
     _vertices[0] = vertices[0];
     _vertices[1] = vertices[1];
     _vertices[2] = vertices[2];
 
+    _triangleId = triangleId;
     _materialId = materialId;
     _textureId = textureId;
 }
@@ -47,6 +48,41 @@ bool Triangle::HitParameter(const Ray &ray, float& parameter) const
 
     parameter = Vector3::Dot(_normal, aToO) / Vector3::Dot(ray.Direction(), _normal);
     return true;
+}
+
+Vector3* Triangle::GetTextureTriangle() const {
+    Vector3* textureTriangle = new Vector3[3];
+    for (int i = 0; i < 3; i++) {
+        switch (_vertices[i]) {
+                // TODO lol fix
+            case 0:
+                textureTriangle[i] = Vector3(1/3, 1/2, 0);
+                break;
+            case 1:
+                textureTriangle[i] = Vector3(1/3, 1/2, 0);
+                break;
+            case 2:
+                textureTriangle[i] = Vector3(0, 0, 0);
+                break;
+            case 3:
+                textureTriangle[i] = Vector3(0, 1/2, 0);
+                break;
+            case 4:
+                textureTriangle[i] = Vector3(1/3, 1, 0);
+                break;
+            case 5:
+                textureTriangle[i] = Vector3(2/3, 1/2, 0);
+                break;
+            case 6:
+                textureTriangle[i] = Vector3(2/3, 1/2, 0);
+                break;
+            case 7:
+                textureTriangle[i] = Vector3(2/3, 0, 0);
+                break;
+        }
+    }
+
+    return textureTriangle;
 }
 
 bool Triangle::RayHit(const Ray& ray, float t, RayHitInfo& hitInfo) const
@@ -89,7 +125,11 @@ bool Triangle::RayHit(const Ray& ray, float t, RayHitInfo& hitInfo) const
     hitInfo.Parameter = t;
     hitInfo.Position = pointOfIntersection;
     hitInfo.Material = _materialId;
-    hitInfo.Texture = _textureId;
+    
+    Vector3* textureTriangle = this->GetTextureTriangle();
+    
+    Color* textureColor = _scene->GetTexture(_textureId).InterpolateTriangle(textureTriangle, alpha, gamma);
+    hitInfo.TextureColor = textureColor;
 
     return true;
 }

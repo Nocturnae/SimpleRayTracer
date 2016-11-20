@@ -42,7 +42,8 @@ std::ostream& operator<<(std::ostream& out, const Ray& ray);
 struct RayHitInfo {
 
 	MaterialId Material;
-    TextureId Texture;
+    //TextureId Texture;
+    Color* TextureColor;
     // change for cube
     Vertex Center;
     float Radius;
