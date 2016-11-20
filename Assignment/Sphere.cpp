@@ -41,6 +41,9 @@ bool Sphere::RayHit(const Ray& ray, RayHitInfo& hitInfo) const
 
 	hitInfo.Position = ray.Origin() + (root * ray.Direction());
 	hitInfo.Material = _material;
+    hitInfo.Texture = _texture;
+    hitInfo.Center = _scene->GetVertex(_center);
+    hitInfo.Radius = _radius;
 	hitInfo.Parameter = root;
     return true;
 }

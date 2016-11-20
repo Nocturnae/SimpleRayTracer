@@ -7,6 +7,8 @@
 
 #include "Material.h"
 #include "Vector3.h"
+#include "Vertex.h"
+#include "Texture.h"
 #include "Color.h"
 
 class Ray {
@@ -40,6 +42,10 @@ std::ostream& operator<<(std::ostream& out, const Ray& ray);
 struct RayHitInfo {
 
 	MaterialId Material;
+    TextureId Texture;
+    // change for cube
+    Vertex Center;
+    float Radius;
 	Vector3 Position;
 	Vector3 Normal;
 

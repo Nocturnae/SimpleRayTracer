@@ -88,6 +88,10 @@ public:
     const Material& GetMaterial(MaterialId id) const {
         return _materials[id - 1];
     }
+    
+    const Texture& GetTexture(TextureId id) const {
+        return _textures[id - 1];
+    }
 
     friend std::istream& operator>>(std::istream& stream, Scene& scene);
 

@@ -13,6 +13,8 @@ class Color {
 public:
     Color();
     Color(float r, float g, float b);
+    
+    Color(const Color& rhs);
 
     inline float R() const
     {
@@ -48,6 +50,7 @@ public:
     friend std::istream& operator>>(std::istream& stream, Color& color);
 
     void Clamp();
+    
 };
 
 #endif //RAYTRACER_COLOR_H

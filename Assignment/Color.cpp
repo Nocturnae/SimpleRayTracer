@@ -17,6 +17,12 @@ Color::Color(float r, float g, float b) {
     _channels[2] = std::max(0.0f, std::min(255.0f, b));
 }
 
+Color::Color(const Color& rhs) {
+    _channels[0] = rhs._channels[0];
+    _channels[1] = rhs._channels[1];
+    _channels[2] = rhs._channels[2];
+}
+
 std::istream &operator>>(std::istream &stream, Color &color) {
     return stream >> color._channels[0] >> color._channels[1] >> color._channels[2];
 }

@@ -17,7 +17,7 @@ Material Material::Diffuse(const Color &color)
 }
 
 Color Material::Calculate(const Vector3 &normal, const Vector3 &pointOfIntersection, const Vector3 &viewDirection,
-                          const Scene *scene, int hitCount) const
+                          const Scene *scene, int hitCount, const Color* textureColor) const
 {
     float _channels[3] =
             {
@@ -49,7 +49,14 @@ Color Material::Calculate(const Vector3 &normal, const Vector3 &pointOfIntersect
             continue;
         }
 
-        Color intensity = light.Intensity(pointOfIntersection);
+        Color intensity;
+        if (textureColor != NULL) {
+            intensity = *textureColor;
+        }
+        else {
+            intensity = light.Intensity(pointOfIntersection);
+        }
+        
         Vector3 lightViewHalf = (viewDirection + lightRayDir).Normalized();
 
         float diffuseCoefficient = std::max(0.0f, Vector3::Dot(normal, lightRayDir));
@@ -76,7 +83,7 @@ void Material::CalculateReflectance(Color &reflectedColor, const Vector3 &normal
     if (scene->FastRaycast(reflectedRay, hitInfo)) {
         reflectedColor =
                 scene->GetMaterial(hitInfo.Material).Calculate(hitInfo.Normal, hitInfo.Position,
-                                                               -reflectedRay.Direction(), scene, hitCount - 1);
+                                                               -reflectedRay.Direction(), scene, hitCount - 1, NULL); // not really null?
     }
 }
 
