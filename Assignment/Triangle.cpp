@@ -52,36 +52,75 @@ bool Triangle::HitParameter(const Ray &ray, float& parameter) const
 
 Vector3* Triangle::GetTextureTriangle() const {
     Vector3* textureTriangle = new Vector3[3];
-    for (int i = 0; i < 3; i++) {
-        switch (_vertices[i]) {
-                // TODO lol fix
-            case 0:
-                textureTriangle[i] = Vector3(1/3, 1/2, 0);
-                break;
-            case 1:
-                textureTriangle[i] = Vector3(1/3, 1/2, 0);
-                break;
-            case 2:
-                textureTriangle[i] = Vector3(0, 0, 0);
-                break;
-            case 3:
-                textureTriangle[i] = Vector3(0, 1/2, 0);
-                break;
-            case 4:
-                textureTriangle[i] = Vector3(1/3, 1, 0);
-                break;
-            case 5:
-                textureTriangle[i] = Vector3(2/3, 1/2, 0);
-                break;
-            case 6:
-                textureTriangle[i] = Vector3(2/3, 1/2, 0);
-                break;
-            case 7:
-                textureTriangle[i] = Vector3(2/3, 0, 0);
-                break;
-        }
-    }
-
+    /*
+    switch (_triangleId) {
+        case 0:
+            textureTriangle[0] = Vector3(1, 1, 0);
+            textureTriangle[1] = Vector3(1, 0.5f, 0);
+            textureTriangle[2] = Vector3(0.666f, 0.5f, 0);
+            break;
+        case 1:
+            textureTriangle[0] = Vector3(1, 1, 0);
+            textureTriangle[1] = Vector3(0.666f, 0.5f, 0);
+            textureTriangle[2] = Vector3(0.666f, 1, 0);
+            break;
+        case 2:
+            textureTriangle[0] = Vector3(0.333f, 0.5f, 0);
+            textureTriangle[1] = Vector3(0, 0.5f, 0);
+            textureTriangle[2] = Vector3(0, 1, 0);
+            break;
+        case 3:
+            textureTriangle[0] = Vector3(0.333f, 0.5f, 0);
+            textureTriangle[1] = Vector3(0, 1, 0);
+            textureTriangle[2] = Vector3(0.333f, 1, 0);
+            break;
+        case 4:
+            textureTriangle[0] = Vector3(0.333f, 0.5f, 0);
+            textureTriangle[1] = Vector3(0.333f, 1, 0);
+            textureTriangle[2] = Vector3(0.666f, 1, 0);
+            break;
+        case 5:
+            textureTriangle[0] = Vector3(0.333f, 0.5f, 0);
+            textureTriangle[1] = Vector3(0.666f, 1, 0);
+            textureTriangle[2] = Vector3(0.666f, 0.5f, 0);
+            break;
+        case 6:
+            textureTriangle[0] = Vector3(0.666f, 0, 0);
+            textureTriangle[1] = Vector3(1, 0, 0);
+            textureTriangle[2] = Vector3(0.666f, 0.5f, 0);
+            break;
+        case 7:
+            textureTriangle[0] = Vector3(0.666f, 0, 0);
+            textureTriangle[1] = Vector3(0.666f, 0.5f, 0);
+            textureTriangle[2] = Vector3(0.666f, 1, 0);
+            break;
+        case 8:
+            textureTriangle[0] = Vector3(0, 0.5f, 0);
+            textureTriangle[1] = Vector3(0.333f, 0.5f, 0);
+            textureTriangle[2] = Vector3(0.333f, 0, 0);
+            break;
+        case 9:
+            textureTriangle[0] = Vector3(0, 0.5f, 0);
+            textureTriangle[1] = Vector3(0.333f, 0, 0);
+            textureTriangle[2] = Vector3(0, 0, 0);
+            break;
+        case 10:
+            textureTriangle[0] = Vector3(0.666f, 0.3f, 0);
+            textureTriangle[1] = Vector3(0.666f, 0, 0);
+            textureTriangle[2] = Vector3(0.333f, 0, 0);
+            break;
+        case 11:
+            textureTriangle[0] = Vector3(0.666f, 0.5f, 0);
+            textureTriangle[1] = Vector3(0.333f, 0, 0);
+            textureTriangle[2] = Vector3(0.333f, 0.5f, 0);
+            break;
+    }*/
+    
+    textureTriangle[0] = Vector3(0.333f, 1, 0);
+    textureTriangle[1] = Vector3(0.333f, 0.5f, 0);
+    textureTriangle[2] = Vector3(0, 0.5f, 0);
+    
+    //std::cout << "*" << textureTriangle[0] << " " << textureTriangle[1] << " " << textureTriangle[2] << std::endl;
     return textureTriangle;
 }
 

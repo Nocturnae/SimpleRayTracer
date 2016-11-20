@@ -24,7 +24,7 @@ public:
     Texture(const char* file) {
         
          read_jpeg_header(file, &_width, &_height);
-         
+        
          _image = new UCOLOR*[_height];
          for (int i = 0; i < _height; i++) {
          _image[i] = new UCOLOR[_width];
