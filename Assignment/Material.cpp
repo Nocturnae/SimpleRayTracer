@@ -49,12 +49,10 @@ Color Material::Calculate(const Vector3 &normal, const Vector3 &pointOfIntersect
             continue;
         }
 
-        Color intensity;
+        Color intensity = light.Intensity(pointOfIntersection);;
+        Color intensity2(1, 1, 1);
         if (textureColor != NULL) {
-            intensity = *textureColor;
-        }
-        else {
-            intensity = light.Intensity(pointOfIntersection);
+            intensity2 = *textureColor;
         }
         
         Vector3 lightViewHalf = (viewDirection + lightRayDir).Normalized();
@@ -62,11 +60,10 @@ Color Material::Calculate(const Vector3 &normal, const Vector3 &pointOfIntersect
         float diffuseCoefficient = std::max(0.0f, Vector3::Dot(normal, lightRayDir));
         float specularCoefficient = std::pow(std::max(0.0f, Vector3::Dot(normal, lightViewHalf)), _phong);
 
-        _channels[0] += intensity.R() * (_diffuse.R() * diffuseCoefficient + _specular.R() * specularCoefficient);
-
-        _channels[1] += intensity.G() * (_diffuse.G() * diffuseCoefficient + _specular.G() * specularCoefficient);
-
-        _channels[2] += intensity.B() * (_diffuse.B() * diffuseCoefficient + _specular.B() * specularCoefficient);
+        _channels[0] += (intensity.R() * _specular.R() * specularCoefficient) + (intensity2.R() * _diffuse.R() * diffuseCoefficient);
+        _channels[1] += (intensity.G() * _specular.G() * specularCoefficient) + (intensity2.G() * _diffuse.G() * diffuseCoefficient);
+        _channels[2] += (intensity.B() * _specular.B() * specularCoefficient) + (intensity2.B() * _diffuse.B() * diffuseCoefficient);
+     
     }
 
     return Color(_channels[0], _channels[1], _channels[2]);

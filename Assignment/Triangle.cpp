@@ -52,7 +52,7 @@ bool Triangle::HitParameter(const Ray &ray, float& parameter) const
 
 Vector3* Triangle::GetTextureTriangle() const {
     Vector3* textureTriangle = new Vector3[3];
-    /*
+    
     switch (_triangleId) {
         case 0:
             textureTriangle[0] = Vector3(1, 1, 0);
@@ -90,9 +90,9 @@ Vector3* Triangle::GetTextureTriangle() const {
             textureTriangle[2] = Vector3(0.666f, 0.5f, 0);
             break;
         case 7:
-            textureTriangle[0] = Vector3(0.666f, 0, 0);
-            textureTriangle[1] = Vector3(0.666f, 0.5f, 0);
-            textureTriangle[2] = Vector3(0.666f, 1, 0);
+            textureTriangle[0] = Vector3(0.666f, 0.5f, 0);
+            textureTriangle[1] = Vector3(1, 0, 0);
+            textureTriangle[2] = Vector3(1, 0.5f, 0);
             break;
         case 8:
             textureTriangle[0] = Vector3(0, 0.5f, 0);
@@ -114,11 +114,11 @@ Vector3* Triangle::GetTextureTriangle() const {
             textureTriangle[1] = Vector3(0.333f, 0, 0);
             textureTriangle[2] = Vector3(0.333f, 0.5f, 0);
             break;
-    }*/
-    
+    }
+    /*
     textureTriangle[0] = Vector3(0.333f, 1, 0);
     textureTriangle[1] = Vector3(0.333f, 0.5f, 0);
-    textureTriangle[2] = Vector3(0, 0.5f, 0);
+    textureTriangle[2] = Vector3(0, 0.5f, 0);*/
     
     //std::cout << "*" << textureTriangle[0] << " " << textureTriangle[1] << " " << textureTriangle[2] << std::endl;
     return textureTriangle;
@@ -169,6 +169,6 @@ bool Triangle::RayHit(const Ray& ray, float t, RayHitInfo& hitInfo) const
     
     Color* textureColor = _scene->GetTexture(_textureId).InterpolateTriangle(textureTriangle, alpha, gamma);
     hitInfo.TextureColor = textureColor;
-
+    
     return true;
 }

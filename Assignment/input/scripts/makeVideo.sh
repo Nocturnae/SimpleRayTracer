@@ -26,7 +26,6 @@ do
     $cmd
 done
 
-#cmd="ffmpeg -r 30 -i ${videoName}_%03d.ppm -vcodec libx264 $videoName.mp4"
-cmd="ffmpeg -r 30 -pattern_type glob -i ${videoName}_%03d.ppm -vcodec libx264 $videoName.mp4"
+cmd="ffmpeg -r 30 -i ${videoName}_%03d.ppm -vcodec libx264 $videoName.mp4"
 echo $cmd
 $cmd

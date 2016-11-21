@@ -2376,31 +2376,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Assignment/Scene.cpp"
-            timestampString = "501351362.840426"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
-            landmarkName = "operator&gt;&gt;(std::istream &amp;stream, Scene &amp;scene)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment/Scene.cpp"
-            timestampString = "501351362.840426"
+            timestampString = "501409142.620315"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "237"
-            endingLineNumber = "237"
+            startingLineNumber = "245"
+            endingLineNumber = "245"
             landmarkName = "operator&gt;&gt;(std::istream &amp;stream, Scene &amp;scene)"
             landmarkType = "9">
          </BreakpointContent>
@@ -2412,11 +2396,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment/Scene.cpp"
-            timestampString = "501351362.840426"
+            timestampString = "501409142.620315"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "248"
-            endingLineNumber = "248"
+            startingLineNumber = "256"
+            endingLineNumber = "256"
             landmarkName = "operator&gt;&gt;(std::istream &amp;stream, Scene &amp;scene)"
             landmarkType = "9">
          </BreakpointContent>
@@ -2444,11 +2428,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment/Scene.cpp"
-            timestampString = "501351362.840426"
+            timestampString = "501409142.620315"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "221"
-            endingLineNumber = "221"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
             landmarkName = "operator&gt;&gt;(std::istream &amp;stream, Scene &amp;scene)"
             landmarkType = "9">
          </BreakpointContent>
@@ -2460,11 +2444,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment/Scene.cpp"
-            timestampString = "501351362.840426"
+            timestampString = "501409142.620315"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "214"
-            endingLineNumber = "214"
+            startingLineNumber = "222"
+            endingLineNumber = "222"
             landmarkName = "operator&gt;&gt;(std::istream &amp;stream, Scene &amp;scene)"
             landmarkType = "9">
          </BreakpointContent>
@@ -2476,11 +2460,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment/Scene.cpp"
-            timestampString = "501351362.840426"
+            timestampString = "501409142.620315"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
+            startingLineNumber = "236"
+            endingLineNumber = "236"
             landmarkName = "operator&gt;&gt;(std::istream &amp;stream, Scene &amp;scene)"
             landmarkType = "9">
          </BreakpointContent>
@@ -2492,11 +2476,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment/Sphere.cpp"
-            timestampString = "501332217.094846"
+            timestampString = "501409142.620315"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "Sphere::RayHit(const Ray&amp; ray, RayHitInfo&amp; hitInfo)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2508,11 +2492,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment/Triangle.cpp"
-            timestampString = "501347009.313861"
+            timestampString = "501409142.620315"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
             landmarkName = "Triangle::RayHit(const Ray&amp; ray, float t, RayHitInfo&amp; hitInfo)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2520,7 +2504,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment/Scene.cpp"
@@ -2540,11 +2524,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment/Scene.cpp"
-            timestampString = "501351362.840426"
+            timestampString = "501409142.620315"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "188"
-            endingLineNumber = "188"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "operator&gt;&gt;(std::istream &amp;stream, Scene &amp;scene)"
             landmarkType = "9">
          </BreakpointContent>
@@ -2556,11 +2540,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment/Scene.cpp"
-            timestampString = "501351362.840426"
+            timestampString = "501409142.620315"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199"
+            startingLineNumber = "203"
+            endingLineNumber = "203"
             landmarkName = "operator&gt;&gt;(std::istream &amp;stream, Scene &amp;scene)"
             landmarkType = "9">
          </BreakpointContent>
@@ -2668,11 +2652,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment/Scene.cpp"
-            timestampString = "501351362.840426"
+            timestampString = "501409142.620315"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "189"
-            endingLineNumber = "189"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
             landmarkName = "operator&gt;&gt;(std::istream &amp;stream, Scene &amp;scene)"
             landmarkType = "9">
          </BreakpointContent>
@@ -2684,11 +2668,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Assignment/Scene.cpp"
-            timestampString = "501351362.840426"
+            timestampString = "501409142.620315"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "195"
+            endingLineNumber = "195"
             landmarkName = "operator&gt;&gt;(std::istream &amp;stream, Scene &amp;scene)"
             landmarkType = "9">
          </BreakpointContent>
@@ -2819,6 +2803,22 @@
             endingLineNumber = "117"
             landmarkName = "operator&gt;&gt;(std::istream &amp;stream, Scene &amp;scene)"
             landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Assignment/Texture.cpp"
+            timestampString = "501413984.251515"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "Texture::InterpolateSphere(Vector3 pointOfIntersection, Vertex center, float radius, Matrix rotMatrix)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

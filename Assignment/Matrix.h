@@ -14,7 +14,7 @@
 class Matrix {
     Vector3 _mtrx[4];
 public:
-    Matrix() : _mtrx{Vector3::Zero} {};
+    Matrix();
     
     Matrix(Vector3 r1, Vector3 r2, Vector3 r3, Vector3 r4);
     

@@ -34,7 +34,6 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
 	}
     
     // textures
-    //getline(stream, dummy);
     stream >> dummy;
     stream >> tmpCount;
     for (i = 0; i < tmpCount; i++) {
@@ -44,8 +43,6 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
     }
 
     // translation
-    //getline(stream, dummy);
-    //getline(stream, dummy);
     stream >> dummy;
     stream >> tmpCount;
     scene._translation.resize(tmpCount);
@@ -60,8 +57,6 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
     }
     
     // scaling
-    //getline(stream, dummy);
-    //getline(stream, dummy);
     stream >> dummy;
     stream >> tmpCount;
     scene._scaling.resize(tmpCount);
@@ -75,16 +70,12 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
         (scene._scaling[i])[3] = r4;
     }
     
-    // rotation
-    //getline(stream, dummy);
-    //getline(stream, dummy);
     stream >> dummy;
     stream >> tmpCount;
     scene._rotation.resize(tmpCount);
     for (i = 0; i < tmpCount; i++) {
         int alpha;
         float u_x, u_y, u_z;
-        //stream >> alpha >> u_x >> u_y >> u_z;
         stream >> alpha;
         stream >> u_x;
         stream >> u_y;
@@ -93,27 +84,28 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
         Vector3 rotationAxis(u_x, u_y, u_z);
         rotationAxis.Normalize();
         
-        float c = cos(alpha), s = sin(alpha);
-        Vector3 r1(pow(rotationAxis[0], 2) * (1 - c) + c,
-                   rotationAxis[0] * rotationAxis[1] * (1 - c) - rotationAxis[2] * s,
-                   rotationAxis[0] * rotationAxis[2] * (1 - c) + rotationAxis[1] * s,
+        float c = cos(alpha * M_PI / 180.0), s = sin(alpha * M_PI / 180.0);
+        
+        Vector3 r1((powf(rotationAxis[0], 2.0f) * (1 - c)) + c,
+                   (rotationAxis[0] * rotationAxis[1] * (1 - c)) - (rotationAxis[2] * s),
+                   (rotationAxis[0] * rotationAxis[2] * (1 - c)) + (rotationAxis[1] * s),
                    0);
-        Vector3 r2(rotationAxis[0] * rotationAxis[1] * (1 - c) + rotationAxis[2] * s,
-                   pow(rotationAxis[1], 2) * (1 - c) + c,
-                   rotationAxis[1] * rotationAxis[2] * (1 - c) - rotationAxis[0] * s,
+        Vector3 r2((rotationAxis[0] * rotationAxis[1] * (1 - c)) + (rotationAxis[2] * s),
+                   (powf(rotationAxis[1], 2.0f) * (1 - c)) + c,
+                   (rotationAxis[1] * rotationAxis[2] * (1 - c)) - (rotationAxis[0] * s),
                    0);
-        Vector3 r3(rotationAxis[0] * rotationAxis[2] * (1 - c) - rotationAxis[1] * s,
-                   rotationAxis[1] * rotationAxis[2] * (1 - c) + rotationAxis[0] * s,
-                   pow(rotationAxis[2], 2) * (1 - c) + c,
+        Vector3 r3((rotationAxis[0] * rotationAxis[2] * (1 - c)) - (rotationAxis[1] * s),
+                   (rotationAxis[1] * rotationAxis[2] * (1 - c)) + (rotationAxis[0] * s),
+                   (powf(rotationAxis[2], 2.0f) * (1 - c)) + c,
                    0);
-        Vector3 r4(0, 0, 0, 1);
+        Vector3 r4(Vector3::Zero);
+        
         (scene._rotation[i])[0] = r1;
         (scene._rotation[i])[1] = r2;
         (scene._rotation[i])[2] = r3;
         (scene._rotation[i])[3] = r4;
     }
 
-    //getline(stream, dummy);
 	stream >> tmpCount;
 	std::string type;
     
@@ -121,13 +113,11 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
     char t_type; int t_id;
 
 	for (i = 0; i < tmpCount; ++i) {
-		/*stream >> type;
-		getline(stream, dummy);*/
-        
-        //getline(stream, type);
         stream >> type;
 
 		if (type == "#CubeInstance") {
+            
+            Matrix transMatrix;
             
             std::vector<Vector3> vertexList = {Vector3(0.5f, 0.5f, 0.5f), Vector3(0.5f, 0.5f, -0.5f),
                 Vector3(-0.5f, 0.5f, -0.5f), Vector3(-0.5f, 0.5f, 0.5f),
@@ -139,17 +129,22 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
             for (int j = 0; j < t_count; j++) {
                 stream >> t_type >> t_id;
                 if (t_type == 's') {
+                    transMatrix = transMatrix * scene._scaling[t_id - 1];
                     for (int k = 0; k < vertexList.size(); k++) {
                         vertexList[k] = scene._scaling[t_id - 1] * vertexList[k];
                     }
                 }
                 else if (t_type == 't') {
+                    transMatrix = transMatrix * scene._translation[t_id - 1];
                     for (int k = 0; k < vertexList.size(); k++) {
                         vertexList[k] = scene._translation[t_id - 1] * vertexList[k];
                     }
                 }
                 else if (t_type == 'r') {
+                    transMatrix = transMatrix * scene._rotation[t_id - 1];
                     for (int k = 0; k < vertexList.size(); k++) {
+                        // TODO: fix
+                        //std::cout << vertexList[k] << ": " << scene._rotation[t_id - 1][0] << " " << scene._rotation[t_id - 1][1] << " " << scene._rotation[t_id - 1][2] << std::endl;
                         vertexList[k] = scene._rotation[t_id - 1] * vertexList[k];
                     }
                 }
@@ -173,15 +168,6 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
                 vidList.push_back(vid);
             }
             
-            /*
-            std::vector<VertexId> vidList;
-            for (int k = 0; k < vertexList.size(); k++) {
-                Vertex vertex(vertexList[k]);
-                VertexId vid = scene._vertices.size() + 1;
-                scene._vertices.push_back(vertex);
-                vidList.push_back(vid);
-            }*/
-            
             Mesh temp(mid, tid, vidList);
             temp.SetScene(&scene);
             scene._meshes.push_back(temp);
@@ -190,6 +176,7 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
 		else {
             
             Vector3 s_center;
+            Matrix rotMatrix;
             float radius = 1.0f;
             
             stream >> mid >> tid >> t_count;
@@ -203,7 +190,7 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
                     s_center = scene._translation[t_id - 1] * s_center;
                 }
                 else if (t_type == 'r') {
-                    
+                    rotMatrix = scene._rotation[t_id - 1] * rotMatrix; //?
                 }
             }
             
@@ -223,7 +210,7 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
                 vid = it - scene._vertices.begin();
             }
             
-            Sphere tmp(vid, radius, mid, tid);
+            Sphere tmp(vid, radius, mid, tid, rotMatrix);
             tmp.SetScene(&scene);
             scene._spheres.push_back(tmp);
             

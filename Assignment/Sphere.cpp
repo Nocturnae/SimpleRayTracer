@@ -6,12 +6,13 @@
 #include "Scene.h"
 #include <cmath>
 
-Sphere::Sphere(VertexId center, float radius, MaterialId material, TextureId texture)
+Sphere::Sphere(VertexId center, float radius, MaterialId material, TextureId texture, Matrix rotMatrix)
 {
     _center = center;
     _radius = radius;
     _material = material;
     _texture = texture;
+    _rotMatrix = rotMatrix;
 }
 
 Vector3 Sphere::Normal(const Vector3 &at) const
@@ -45,8 +46,7 @@ bool Sphere::RayHit(const Ray& ray, RayHitInfo& hitInfo) const
     hitInfo.Radius = _radius;
 	hitInfo.Parameter = root;
     
-    Color* textureColor = _scene->GetTexture(_texture).InterpolateSphere(hitInfo.Position, hitInfo.Center, _radius);
-    //std::cout << (*textureColor).R() << " " << (*textureColor).G() << " " << (*textureColor).B() << std::endl;
+    Color* textureColor = _scene->GetTexture(_texture).InterpolateSphere(hitInfo.Position, hitInfo.Center, _radius, _rotMatrix);
     hitInfo.TextureColor = textureColor;
     
     return true;

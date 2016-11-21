@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include "Vertex.h"
+#include "Matrix.h"
 #include "Color.h"
 extern "C" {
     #include "jpeg_reader/aoa_jpeg.h"
@@ -34,7 +35,7 @@ public:
         
     }
     
-    Color* InterpolateSphere(Vector3 point, Vertex center, float radius) const;
+    Color* InterpolateSphere(Vector3 point, Vertex center, float radius, Matrix rotMatrix) const;
     Color* InterpolateTriangle(Vector3 textureTriangle[3], float beta, float gamma) const;
 };
 
