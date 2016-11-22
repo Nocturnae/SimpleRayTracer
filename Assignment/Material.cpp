@@ -80,7 +80,7 @@ void Material::CalculateReflectance(Color &reflectedColor, const Vector3 &normal
     if (scene->FastRaycast(reflectedRay, hitInfo)) {
         reflectedColor =
                 scene->GetMaterial(hitInfo.Material).Calculate(hitInfo.Normal, hitInfo.Position,
-                                                               -reflectedRay.Direction(), scene, hitCount - 1, hitInfo.TextureColor); 
+                                                               -reflectedRay.Direction(), scene, hitCount - 1, hitInfo.TextureColor);
     }
 }
 

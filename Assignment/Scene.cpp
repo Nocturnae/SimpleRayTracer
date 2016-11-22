@@ -25,10 +25,8 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
 
     // materials
 	stream >> tmpCount;
-	//getline(stream, dummy);
 	scene._materials.resize(tmpCount);
 	for (i = 0; i < tmpCount; ++i) {
-		//getline(stream, dummy);
         stream >> dummy >> dummy;
 		stream >> scene._materials[i] >> std::ws;
 	}
@@ -73,6 +71,7 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
     stream >> dummy;
     stream >> tmpCount;
     scene._rotation.resize(tmpCount);
+    scene._reverse.resize(tmpCount);
     for (i = 0; i < tmpCount; i++) {
         int alpha;
         float u_x, u_y, u_z;
@@ -104,6 +103,28 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
         (scene._rotation[i])[1] = r2;
         (scene._rotation[i])[2] = r3;
         (scene._rotation[i])[3] = r4;
+        
+        float c_r = cosf(2 * M_PI - (alpha * M_PI / 180.0)), s_r = sinf(2 * M_PI - (alpha * M_PI / 180.0));
+        
+        Vector3 r1_r((powf(rotationAxis[0], 2.0f) * (1 - c_r)) + c_r,
+                   (rotationAxis[0] * rotationAxis[1] * (1 - c_r)) - (rotationAxis[2] * s_r),
+                   (rotationAxis[0] * rotationAxis[2] * (1 - c_r)) + (rotationAxis[1] * s_r),
+                   0);
+        Vector3 r2_r((rotationAxis[0] * rotationAxis[1] * (1 - c_r)) + (rotationAxis[2] * s_r),
+                   (powf(rotationAxis[1], 2.0f) * (1 - c_r)) + c_r,
+                   (rotationAxis[1] * rotationAxis[2] * (1 - c_r)) - (rotationAxis[0] * s_r),
+                   0);
+        Vector3 r3_r((rotationAxis[0] * rotationAxis[2] * (1 - c_r)) - (rotationAxis[1] * s_r),
+                   (rotationAxis[1] * rotationAxis[2] * (1 - c_r)) + (rotationAxis[0] * s_r),
+                   (powf(rotationAxis[2], 2.0f) * (1 - c_r)) + c_r,
+                   0);
+        Vector3 r4_r(Vector3::Zero);
+        
+        (scene._reverse[i])[0] = r1_r;
+        (scene._reverse[i])[1] = r2_r;
+        (scene._reverse[i])[2] = r3_r;
+        (scene._reverse[i])[3] = r4_r;
+        
     }
 
 	stream >> tmpCount;
@@ -129,22 +150,17 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
             for (int j = 0; j < t_count; j++) {
                 stream >> t_type >> t_id;
                 if (t_type == 's') {
-                    transMatrix = transMatrix * scene._scaling[t_id - 1];
                     for (int k = 0; k < vertexList.size(); k++) {
                         vertexList[k] = scene._scaling[t_id - 1] * vertexList[k];
                     }
                 }
                 else if (t_type == 't') {
-                    transMatrix = transMatrix * scene._translation[t_id - 1];
                     for (int k = 0; k < vertexList.size(); k++) {
                         vertexList[k] = scene._translation[t_id - 1] * vertexList[k];
                     }
                 }
                 else if (t_type == 'r') {
-                    transMatrix = transMatrix * scene._rotation[t_id - 1];
                     for (int k = 0; k < vertexList.size(); k++) {
-                        // TODO: fix
-                        //std::cout << vertexList[k] << ": " << scene._rotation[t_id - 1][0] << " " << scene._rotation[t_id - 1][1] << " " << scene._rotation[t_id - 1][2] << std::endl;
                         vertexList[k] = scene._rotation[t_id - 1] * vertexList[k];
                     }
                 }
@@ -156,12 +172,10 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
                 VertexId vid;
                 std::vector<Vertex>::iterator it = find(scene._vertices.begin(), scene._vertices.end(), vertex);
                 if (it == scene._vertices.end()) {
-                    // TODO: check
                     vid = scene._vertices.size() + 1;
                     scene._vertices.push_back(vertex);
                 }
                 else {
-                    // TODO: check
                     vid = it - scene._vertices.begin();
                 }
                 
@@ -190,23 +204,23 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
                     s_center = scene._translation[t_id - 1] * s_center;
                 }
                 else if (t_type == 'r') {
-                    rotMatrix = scene._rotation[t_id - 1] * rotMatrix; //?
+                    /*std::cout << "**" << scene._reverse[t_id - 1][0] << " "
+                    << scene._reverse[t_id - 1][1] << " "
+                    << scene._reverse[t_id - 1][2] << "**" << std::endl;*/
+                    rotMatrix = scene._reverse[t_id - 1] * rotMatrix;
+                    //std::cout << rotMatrix[0] << " " << rotMatrix[1] << " " << rotMatrix[2] << std::endl;
                 }
             }
             
             Vertex center(s_center);
             VertexId vid;
             
-            //scene._vertices.push_back(center);
-            
             std::vector<Vertex>::iterator it = find(scene._vertices.begin(), scene._vertices.end(), center);
             if (it == scene._vertices.end()) {
-                // TODO: check
                 vid = scene._vertices.size() + 1;
                 scene._vertices.push_back(center);
             }
             else {
-                // TODO: check
                 vid = it - scene._vertices.begin();
             }
             
@@ -270,43 +284,7 @@ void Scene::AddCameras(std::istream &stream)
 		_cameras[i].SetScene(this);
 	}
 }
-/*
-Scene Scene::GetMockScene()
-{
-    
-	Scene scene;
-	scene._vertices.push_back(Vertex(Vector3(0, 0, 0)));
-	scene._vertices.push_back(Vertex(Vector3(3, 0, 0)));
-	scene._vertices.push_back(Vertex(Vector3(-3, 0, 0)));
-	scene._vertices.push_back(Vertex(Vector3(0, 3, 0)));
-	scene._vertices.push_back(Vertex(Vector3(0, -3, 0)));
 
-	scene._materials.push_back(Material::Diffuse(Color(255, 0, 0)));
-	scene._materials.push_back(Material::Diffuse(Color(255, 255, 0)));
-	scene._materials.push_back(Material::Diffuse(Color(255, 255, 255)));
-	scene._materials.push_back(Material::Diffuse(Color(0, 255, 255)));
-	scene._materials.push_back(Material::Diffuse(Color(0, 0, 255)));
-
-	scene._spheres.push_back(Sphere(1, 1, 1));
-	scene._spheres.push_back(Sphere(2, 1, 2));
-	scene._spheres.push_back(Sphere(3, 1, 3));
-	scene._spheres.push_back(Sphere(4, 1, 4));
-	scene._spheres.push_back(Sphere(5, 1, 5));
-
-	scene._spheres[0].SetScene(&scene);
-	scene._spheres[1].SetScene(&scene);
-	scene._spheres[2].SetScene(&scene);
-	scene._spheres[3].SetScene(&scene);
-	scene._spheres[4].SetScene(&scene);
-
-	scene._cameras.push_back(Camera(Vector3(0, 0, -5), Vector3(0, 1, 0), Vector3(0, 0, 1), -5, 5, -5, 5, 1, 256, 256));
-	scene._cameras[0].SetScene(&scene);
-	
-	scene._background = Color(128, 0, 96);
-
-	return scene;
-}
-*/
 Scene::Scene(const Scene& rhs)
 {
 	*this = rhs;

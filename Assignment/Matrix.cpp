@@ -31,7 +31,6 @@ Vector3& Matrix::operator[](int index) {
 Matrix Matrix::operator*(Matrix rhs) const {
     Matrix res;
     
-    // TODO: check
     res[0][0] = (_mtrx[0][0] * rhs._mtrx[0][0]) + (_mtrx[0][1] * rhs._mtrx[1][0]) + (_mtrx[0][2] * rhs._mtrx[2][0]);
     res[0][1] = (_mtrx[0][0] * rhs._mtrx[0][1]) + (_mtrx[0][1] * rhs._mtrx[1][1]) + (_mtrx[0][2] * rhs._mtrx[2][1]);
     res[0][2] = (_mtrx[0][0] * rhs._mtrx[0][2]) + (_mtrx[0][1] * rhs._mtrx[1][2]) + (_mtrx[0][2] * rhs._mtrx[2][2]);
@@ -60,3 +59,62 @@ Vector3 Matrix::operator*(Vector3 rhs) const {
     
     return res;
 }
+
+Matrix Matrix::Inverse() const {
+    
+    Matrix res;
+    
+    float det = Det();
+    if (det < 0.0001f) return res;
+    
+    res[0][0] = (_mtrx[1][1] * _mtrx[2][2] * _mtrx[3][3]
+            + _mtrx[1][2] * _mtrx[2][3] * _mtrx[3][1]
+            + _mtrx[1][3] * _mtrx[2][1] * _mtrx[3][2]
+            - _mtrx[1][1] * _mtrx[2][3] * _mtrx[3][2]
+            - _mtrx[1][2] * _mtrx[2][1] * _mtrx[3][3]
+            - _mtrx[1][3] * _mtrx[2][2] * _mtrx[3][1]) / det;
+    
+    res[0][1] = (_mtrx[0][1] * _mtrx[2][3] * _mtrx[3][2]
+                 + _mtrx[0][2] * _mtrx[2][1] * _mtrx[3][3]
+                 + _mtrx[0][3] * _mtrx[2][2] * _mtrx[3][1]
+                 - _mtrx[0][1] * _mtrx[2][2] * _mtrx[3][3]
+                 - _mtrx[0][2] * _mtrx[1][1] * _mtrx[3][3]
+                 - _mtrx[0][3] * _mtrx[2][1] * _mtrx[3][2]) / det;
+    
+    res[0][2] = (_mtrx[0][1] * _mtrx[1][2] * _mtrx[3][3]
+                 + _mtrx[0][2] * _mtrx[1][3] * _mtrx[3][1]
+                 + _mtrx[0][3] * _mtrx[1][1] * _mtrx[3][2]
+                 - _mtrx[0][1] * _mtrx[1][3] * _mtrx[3][2]
+                 - _mtrx[1][2] * _mtrx[2][1] * _mtrx[3][3]
+                 - _mtrx[1][3] * _mtrx[2][2] * _mtrx[3][1]) / det;
+    
+    return res;
+    
+}
+
+float Matrix::Det() const {
+    return _mtrx[0][0] * _mtrx[1][1] * _mtrx[2][2] * _mtrx[3][3]
+        + _mtrx[0][0] * _mtrx[1][2] * _mtrx[2][3] * _mtrx[3][1]
+        + _mtrx[0][0] * _mtrx[1][3] * _mtrx[2][1] * _mtrx[3][2]
+        + _mtrx[0][1] * _mtrx[1][0] * _mtrx[2][3] * _mtrx[3][2]
+        + _mtrx[0][1] * _mtrx[1][2] * _mtrx[2][0] * _mtrx[3][3]
+        + _mtrx[0][1] * _mtrx[1][3] * _mtrx[2][2] * _mtrx[3][0]
+        + _mtrx[0][2] * _mtrx[1][0] * _mtrx[2][1] * _mtrx[3][3]
+        + _mtrx[0][2] * _mtrx[1][1] * _mtrx[2][3] * _mtrx[3][0]
+        + _mtrx[0][2] * _mtrx[1][3] * _mtrx[2][0] * _mtrx[3][1]
+        + _mtrx[0][3] * _mtrx[1][0] * _mtrx[2][2] * _mtrx[3][1]
+        + _mtrx[0][3] * _mtrx[1][1] * _mtrx[2][0] * _mtrx[3][2]
+        + _mtrx[0][3] * _mtrx[1][2] * _mtrx[2][1] * _mtrx[3][0]
+        - _mtrx[0][0] * _mtrx[1][1] * _mtrx[2][3] * _mtrx[3][2]
+        - _mtrx[0][0] * _mtrx[1][2] * _mtrx[2][1] * _mtrx[3][3]
+        - _mtrx[0][0] * _mtrx[1][3] * _mtrx[2][2] * _mtrx[3][1]
+        - _mtrx[0][1] * _mtrx[1][0] * _mtrx[2][2] * _mtrx[3][3]
+        - _mtrx[0][1] * _mtrx[1][2] * _mtrx[2][3] * _mtrx[3][0]
+        - _mtrx[0][1] * _mtrx[1][3] * _mtrx[2][0] * _mtrx[3][2]
+        - _mtrx[0][2] * _mtrx[1][0] * _mtrx[2][3] * _mtrx[3][1]
+        - _mtrx[0][2] * _mtrx[1][1] * _mtrx[2][0] * _mtrx[3][3]
+        - _mtrx[0][2] * _mtrx[1][3] * _mtrx[2][1] * _mtrx[3][0]
+        - _mtrx[0][3] * _mtrx[1][0] * _mtrx[2][1] * _mtrx[3][2]
+        - _mtrx[0][3] * _mtrx[1][1] * _mtrx[2][2] * _mtrx[3][0]
+    - _mtrx[0][3] * _mtrx[1][2] * _mtrx[2][0] * _mtrx[3][1];
+};

@@ -34,6 +34,8 @@ class Scene {
     std::vector<Matrix> _translation;
     std::vector<Matrix> _scaling;
     std::vector<Matrix> _rotation;
+    
+    std::vector<Matrix> _reverse;
 
     std::vector<PointLight> _lights;
 

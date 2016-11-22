@@ -12,7 +12,6 @@ Vector3::Vector3(float x, float y, float z) {
     X(x);
     Y(y);
     Z(z);
-    //W(0);
     W(1);
 }
 

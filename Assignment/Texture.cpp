@@ -16,16 +16,15 @@ Color* Texture::InterpolateSphere(Vector3 pointOfIntersection, Vertex center, fl
     float theta = acosf(rotAxes[1] / radius);
     float phi = atan2f(rotAxes[2], rotAxes[0]);
     
+     /*
     if (phi < 0.0001f) {
         phi += 2 * M_PI;
     }
-    
+    */
     float u = (M_PI - phi) / (2 * M_PI), v = theta / M_PI;
     
     int j = std::max(0, std::min((int)std::round(u * _width), _width - 1)),
         i = std::max(0, std::min((int)std::round(v * _height), _height - 1));
-    
-    //std::cout << theta << " " << phi << " " << i << " " << j << " " << u << " " << v << std::endl;
     
     Color* res = new Color(_image[i][j][0], _image[i][j][1], _image[i][j][2]);
     return res;
