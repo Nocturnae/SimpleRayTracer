@@ -23,10 +23,6 @@ public:
     Matrix operator*(Matrix rhs) const;
     
     Vector3 operator*(Vector3 rhs) const;
-    
-    Matrix Inverse() const;
-    
-    float Det() const;
 };
 
 #endif /* Matrix_hpp */

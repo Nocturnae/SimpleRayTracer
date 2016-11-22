@@ -204,11 +204,7 @@ std::istream &operator>>(std::istream &stream, Scene &scene)
                     s_center = scene._translation[t_id - 1] * s_center;
                 }
                 else if (t_type == 'r') {
-                    /*std::cout << "**" << scene._reverse[t_id - 1][0] << " "
-                    << scene._reverse[t_id - 1][1] << " "
-                    << scene._reverse[t_id - 1][2] << "**" << std::endl;*/
                     rotMatrix = scene._reverse[t_id - 1] * rotMatrix;
-                    //std::cout << rotMatrix[0] << " " << rotMatrix[1] << " " << rotMatrix[2] << std::endl;
                 }
             }
             
